@@ -2,67 +2,60 @@
 <items version="2" >
 
     <item
-        jar="A:\Projects\subway_alert\app\libs\ParseFacebookUtilsV3-1.9.4.jar"
+        jar="D:\subway_alert\app\libs\volley.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="9ad88479eadea36956d1e9c67604c68cb1cc222d">
-        <dex dex="A:\Projects\subway_alert\app\build\intermediates\pre-dexed\debug\ParseFacebookUtilsV3-1.9.4-3b102a6ca701f43f970b7ad0da6d8ff012da2a22.jar" />
+        sha1="d4aaa36e04ee71a83444f8367c97a46fda662d2c">
+        <dex dex="D:\subway_alert\app\build\intermediates\pre-dexed\debug\volley-fbb3450e77ab549ef67f8a67b2288ed14b3f029e.jar" />
     </item>
     <item
-        jar="A:\Projects\subway_alert\app\libs\bolts-android-1.2.0.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="6ee2953ccf51ce72b6d548c30c4633b99eb4f9dd">
-        <dex dex="A:\Projects\subway_alert\app\build\intermediates\pre-dexed\debug\bolts-android-1.2.0-7b21652a18c9692fd70df52bfab9ecf66cccaf8d.jar" />
-    </item>
-    <item
-        jar="A:\Projects\subway_alert\app\libs\ParseCrashReporting-1.9.4.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="7a11f2d74111fd9b02c2d091a1b76b82f6a4357e">
-        <dex dex="A:\Projects\subway_alert\app\build\intermediates\pre-dexed\debug\ParseCrashReporting-1.9.4-dfe7e1b33478464b538ee5780b4c425ea07e4d5e.jar" />
-    </item>
-    <item
-        jar="A:\Projects\subway_alert\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.1.1\libs\internal_impl-22.1.1.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="9e070ad32b2700b0343e8e0cccc437733d91ba3a">
-        <dex dex="A:\Projects\subway_alert\app\build\intermediates\pre-dexed\debug\internal_impl-22.1.1-7ef0b7f1524511a97eaba159fa2847b01bf609a5.jar" />
-    </item>
-    <item
-        jar="A:\Projects\subway_alert\app\libs\ParseFacebookUtilsV4-1.9.4.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="d0490b697e2ff12e81b214d17f166534dfd3bced">
-        <dex dex="A:\Projects\subway_alert\app\build\intermediates\pre-dexed\debug\ParseFacebookUtilsV4-1.9.4-f3ecd079ecdc2a858eedca9d752e03666c118c12.jar" />
-    </item>
-    <item
-        jar="A:\Projects\subway_alert\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.1.1\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="c95ba8152923e4872e86a82cfcba9a51c0214328">
-        <dex dex="A:\Projects\subway_alert\app\build\intermediates\pre-dexed\debug\classes-50b81a03fa6c15dcc811ef61b3d0e28010b10dbb.jar" />
-    </item>
-    <item
-        jar="C:\Users\sabersknight13\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\22.1.1\support-annotations-22.1.1.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="01d051a6bfb1218b1db2d3a5af0480ac2c25c42a">
-        <dex dex="A:\Projects\subway_alert\app\build\intermediates\pre-dexed\debug\support-annotations-22.1.1-7deb27ec899d16bd696f7c9f47bfbf1f42b42e74.jar" />
-    </item>
-    <item
-        jar="A:\Projects\subway_alert\app\libs\Parse-1.9.4.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="56c22930b5d4f77015b6a40c7f14103d3e101001">
-        <dex dex="A:\Projects\subway_alert\app\build\intermediates\pre-dexed\debug\Parse-1.9.4-2300856e03dedb6283cd6f6db507d6d955509850.jar" />
-    </item>
-    <item
-        jar="A:\Projects\subway_alert\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.1.1\classes.jar"
+        jar="D:\subway_alert\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.1.1\classes.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="a3ff3c506644c820eb2bdf06e8339f72be578551">
-        <dex dex="A:\Projects\subway_alert\app\build\intermediates\pre-dexed\debug\classes-b78615841eae6b224fe249944daf872d8c4ab1b9.jar" />
+        <dex dex="D:\subway_alert\app\build\intermediates\pre-dexed\debug\classes-f8e70b6270cb5ca4d14e6ef32b1553ea740f189b.jar" />
+    </item>
+    <item
+        jar="C:\Users\dameng\.gradle\caches\modules-2\files-2.1\com.mcxiaoke.volley\library\1.0.15\9093a362d18c5f81f58e49d86dece57d9b6e1cb7\library-1.0.15.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="9093a362d18c5f81f58e49d86dece57d9b6e1cb7">
+        <dex dex="D:\subway_alert\app\build\intermediates\pre-dexed\debug\library-1.0.15-c11aae7fa3a3153494b85ddc9c1e7c68387f6585.jar" />
+    </item>
+    <item
+        jar="D:\subway_alert\app\libs\Parse-1.9.4.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="56c22930b5d4f77015b6a40c7f14103d3e101001">
+        <dex dex="D:\subway_alert\app\build\intermediates\pre-dexed\debug\Parse-1.9.4-ba9e7cfaef3ecc2b792b362147c34f5ad06e610b.jar" />
+    </item>
+    <item
+        jar="D:\subway_alert\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.1.1\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="c95ba8152923e4872e86a82cfcba9a51c0214328">
+        <dex dex="D:\subway_alert\app\build\intermediates\pre-dexed\debug\classes-0abc2042743db293e73605e83f85640702310aa3.jar" />
+    </item>
+    <item
+        jar="C:\Users\dameng\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\22.1.1\support-annotations-22.1.1.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="01d051a6bfb1218b1db2d3a5af0480ac2c25c42a">
+        <dex dex="D:\subway_alert\app\build\intermediates\pre-dexed\debug\support-annotations-22.1.1-fb0cb3ca5d1c12de0eab1f2bbc2407198d5ace13.jar" />
+    </item>
+    <item
+        jar="C:\Users\dameng\.gradle\caches\modules-2\files-2.1\com.parse.bolts\bolts-android\1.2.0\6ee2953ccf51ce72b6d548c30c4633b99eb4f9dd\bolts-android-1.2.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="6ee2953ccf51ce72b6d548c30c4633b99eb4f9dd">
+        <dex dex="D:\subway_alert\app\build\intermediates\pre-dexed\debug\bolts-android-1.2.0-60c3a3225e9daa8a8d91079b69471472538d4f8a.jar" />
+    </item>
+    <item
+        jar="D:\subway_alert\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.1.1\libs\internal_impl-22.1.1.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="9e070ad32b2700b0343e8e0cccc437733d91ba3a">
+        <dex dex="D:\subway_alert\app\build\intermediates\pre-dexed\debug\internal_impl-22.1.1-e8e0d2950ae3663360b71ee63999b02d1d0ddb84.jar" />
     </item>
 
 </items>
