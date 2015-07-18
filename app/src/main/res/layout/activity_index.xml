@@ -23,7 +23,8 @@
                 android:background="@android:color/white"
                 android:id="@+id/work_station_name"
                 android:layout_gravity="center_horizontal"
-                android:onClick="gotoStationSetting" />
+                android:onClick="gotoStationSetting"
+                android:layout_marginBottom="5dp" />
 
             <TextView
                 android:layout_width="fill_parent"
@@ -32,7 +33,8 @@
                 android:background="@android:color/white"
                 android:text="Train comes in: X mins"
                 android:id="@+id/train_arrive_time_work_1"
-                android:layout_gravity="center_horizontal" />
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="5dp" />
 
             <TextView
                 android:layout_width="fill_parent"
@@ -41,7 +43,8 @@
                 android:background="@android:color/white"
                 android:text="Train comes in: X mins"
                 android:id="@+id/train_arrive_time_work_2"
-                android:layout_gravity="center_horizontal" />
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="5dp" />
 
             <Button
                 android:layout_width="fill_parent"
@@ -50,7 +53,8 @@
                 android:text="Time from your location to the work station"
                 android:id="@+id/time_to_work_station"
                 android:layout_gravity="center_horizontal"
-                android:onClick="gotoTimeSetting" />
+                android:onClick="gotoTimeSetting"
+                android:layout_marginBottom="5dp" />
 
             <Button
                 android:layout_width="fill_parent"
