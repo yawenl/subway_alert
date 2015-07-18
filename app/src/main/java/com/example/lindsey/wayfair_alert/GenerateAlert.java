@@ -141,6 +141,16 @@ public class GenerateAlert extends TimerTask{
                                                 break;
                                             }
                                         }
+
+                                        for (int m = 0; m < 2 && m < trips.length(); ++m) {
+                                            JSONObject trip = (JSONObject) trips.get(m);
+                                            int next_arrival_time = trip.getInt("pre_dt");
+                                            if (m == 0) {
+                                                editor.putInt("next_train", next_arrival_time);
+                                            } else if (m == 1) {
+                                                editor.putInt("next_next_train", next_arrival_time);
+                                            }
+                                        }
                                     }
                                 }
                             }
