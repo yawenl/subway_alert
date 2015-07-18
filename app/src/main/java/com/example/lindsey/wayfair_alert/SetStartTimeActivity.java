@@ -83,7 +83,6 @@ public class SetStartTimeActivity extends ActionBarActivity {
         int timeEWorkToStation = Integer.parseInt(((EditText)this.findViewById(R.id.eWorkToStation)).getText().toString());
         editor.putInt("eWorkToStation", timeEWorkToStation);
 
-
         editor.commit();
 
         Intent intent_main = new Intent(this, MainActivity.class);
