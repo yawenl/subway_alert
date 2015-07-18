@@ -11,5 +11,6 @@ public class TrainInfo {
     public String route_id;
     public int direction_id;
     public String trip_name;
+    public String notification = "default";
 
 }

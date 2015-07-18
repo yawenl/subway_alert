@@ -19,20 +19,15 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 
-
-import org.json.JSONArray;
-import org.json.JSONObject;
+import java.util.Timer;
 
 public class MainActivity extends ActionBarActivity {
 
     private ProgressBar progressBar;
-    private JSONParser jsonParser;
+    private TrainInfo train_info;
+
     //10.0.2.2 is the address used by the Android emulators to refer to the host address
     // change this to the IP of another host if required
-    private static String ageURL = "https://raw.githubusercontent.com/dm37537/Career-Matcher/master/App/test.json";
-    private static String TAG = MainActivity.class.getSimpleName();
-    protected String notification;
-    protected JSONObject json;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,15 +40,18 @@ public class MainActivity extends ActionBarActivity {
 
         progressBar = (ProgressBar) findViewById(R.id.spinner);
 
-        jsonParser = new JSONParser();
-        try {
-            this.notification = (new GenerateNotification(ageURL).execute()).get();
-        }catch (Exception e) {
-            
-        }
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("isDismiss", "not dismissed");
+        editor.commit();
+        Log.d("main_ac", sharedPref.getString("isDismiss", "not dismissed"));
+        Timer timer = new Timer();
+        TrainInfo train_info = new TrainInfo();
+        GenerateAlert ga = new GenerateAlert(train_info, this);
+        timer.schedule(ga, 0, 5000);
 
-        Log.d(TAG, this.notification);
-        createNotification(this.notification);
+        Log.d("main:", train_info.notification);
+       // createNotification(train_info.notification);
     }
 
     @Override
@@ -159,63 +157,6 @@ public class MainActivity extends ActionBarActivity {
         };
     }
 
-    private class GenerateNotification extends AsyncTask<String, Void, String> implements Runnable{
-        private String url;
-
-        public GenerateNotification(String url) {
-            this.url = url;
-        }
-        public void run() {
-            doInBackground();
-        }
-        protected String doInBackground(String... urls) {
-            json = jsonParser.getJSONFromUrl(this.url);
-            String generate_notification = "";
-            try {
-                int predict_arrival_time = 0;
-                String stop_id = json.getString("stop_id");
-                String stop_name = json.getString("stop_name");
-                String trip_name = "";
-                JSONArray modes = json.getJSONArray("mode");
-                for (int i = 0; i < modes.length(); ++i) {
-                    JSONObject mode = (JSONObject) modes.get(i);
-                    int type = mode.getInt("route_type");
-                    if (type == 1){
-                        JSONArray routes = mode.getJSONArray("route");
-                        for (int j = 0; j < routes.length(); ++j) {
-                            JSONObject route = (JSONObject) routes.get(i);
-                            String route_id = route.getString("route_id");
-                            JSONArray directions = route.getJSONArray("direction");
-                            for (int k = 0; k < directions.length(); ++k) {
-                                JSONObject direction = (JSONObject) directions.get(i);
-                                int direction_id = direction.getInt("direction_id");
-                                JSONArray trips = direction.getJSONArray("trip");
-                                for (int m = 0; m < trips.length(); ++m) {
-                                    JSONObject trip = (JSONObject) trips.get(i);
-                                    predict_arrival_time = trip.getInt("pre_dt");
-                                    trip_name = trip.getString("trip_name");
-                                }
-                            }
-                        }
-                    }
-                }
-
-                generate_notification = "Train from " + trip_name + " will arrive soon";
-                Log.d(TAG, json.toString());
-                Log.d(TAG, generate_notification);
-            } catch (Exception e) {
-                e.printStackTrace();
-                generate_notification = "There is no train available now";
-                return generate_notification;
-            }
-            return generate_notification;
-        }
-    }
-
-    public JSONObject getAge(){
-        JSONObject json = jsonParser.getJSONFromUrl(ageURL);
-        return json;
-    }
 
     /**
      * Callback function for signUp button. Triggers an Intent to go to the SignUpActivity.
