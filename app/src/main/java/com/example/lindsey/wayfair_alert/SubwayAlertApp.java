@@ -11,8 +11,6 @@ import android.util.Base64;
 import android.util.Log;
 
 import com.parse.Parse;
-import com.parse.ParseObject;
-import com.parse.ParseFacebookUtils;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
