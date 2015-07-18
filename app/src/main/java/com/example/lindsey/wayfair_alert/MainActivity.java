@@ -1,8 +1,14 @@
 package com.example.lindsey.wayfair_alert;
 
-import android.content.Intent;
+
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Intent;
+import android.preference.PreferenceManager;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,10 +21,6 @@ import android.widget.ProgressBar;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
-
-import java.util.Arrays;
-import java.util.List;
-
 
 public class MainActivity extends ActionBarActivity {
 
@@ -33,6 +35,57 @@ public class MainActivity extends ActionBarActivity {
         passField.setTypeface(Typeface.DEFAULT);
 
         progressBar = (ProgressBar) findViewById(R.id.spinner);
+
+        createNotification(20);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d("ActivityLifeCycleDemo", "onResume");
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        String userName = sharedPref.getString("isDismiss", "not dismissed");
+
+        Log.d("", userName);
+    }
+
+    public NotificationCompat.Builder createNotification(int timeToLeave) {
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this)
+                .setSmallIcon(R.drawable.alert)
+                .setContentTitle("Subway Alert:")
+                .setContentText("Leave office in " +timeToLeave+" min")
+                .setAutoCancel(true)
+                .setStyle(new NotificationCompat.BigTextStyle().bigText("Leave office in " +timeToLeave+" min"));
+        //go to activity
+        Intent resultIntent = new Intent(this, MainActivity.class);
+        PendingIntent resultPendingIntent =
+                PendingIntent.getActivity(
+                        this,
+                        0,
+                        resultIntent,
+                        PendingIntent.FLAG_UPDATE_CURRENT
+                );
+        mBuilder.setContentIntent(resultPendingIntent);
+
+        //dismiss
+        int mNotificationId = 001;
+        Intent dismissIntent = new Intent(this, DismissNotifier.class);
+        dismissIntent.putExtra("notificationID", mNotificationId);
+        PendingIntent dismissPIntent = PendingIntent.getActivity(this, 0, dismissIntent, 0);
+
+        //snooze
+        Intent snoozeIntent = new Intent(this, SnoozeNotifier.class);
+        snoozeIntent.putExtra("notificationID", mNotificationId);
+        PendingIntent snoozePIntent = PendingIntent.getActivity(this, 0, snoozeIntent, 0);
+
+        //add to notification builder
+        mBuilder.addAction(R.drawable.no, "dismiss", dismissPIntent);
+        mBuilder.addAction(R.drawable.snooze, "snooze", snoozePIntent);
+
+        NotificationManager mNotifyMgr = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        mNotifyMgr.notify(mNotificationId, mBuilder.build());
+
+        return mBuilder;
     }
 
     /**
