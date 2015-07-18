@@ -95,7 +95,7 @@ public class SignUpActivity extends ActionBarActivity {
             protected void onPostExecute(String errorMsg) {
                 progressBar.setVisibility(View.GONE);
                 if (errorMsg == null) { //login success then launch main activity
-                    Intent mainIntent = new Intent(SignUpActivity.this, MainActivity.class);
+                    Intent mainIntent = new Intent(SignUpActivity.this, IndexActivity.class);
                     startActivity(mainIntent);
                     finish();
                 } else {
