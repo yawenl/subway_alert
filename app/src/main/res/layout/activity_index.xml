@@ -16,12 +16,22 @@
             android:layout_centerInParent="true"
             android:orientation="vertical">
 
-            <Button
+            <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="Work Station Name+inbound/outbound"
                 android:background="@android:color/white"
                 android:id="@+id/work_station_name"
+                android:layout_gravity="center_horizontal"
+                android:onClick="gotoStationSetting"
+                android:layout_marginBottom="5dp" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Work Station Name+inbound/outbound"
+                android:background="@android:color/white"
+                android:id="@+id/work_station_direction"
                 android:layout_gravity="center_horizontal"
                 android:onClick="gotoStationSetting"
                 android:layout_marginBottom="5dp" />
@@ -46,7 +56,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="5dp" />
 
-            <Button
+            <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/white"

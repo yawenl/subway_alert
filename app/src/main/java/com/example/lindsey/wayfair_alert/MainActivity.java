@@ -42,10 +42,10 @@ public class MainActivity extends ActionBarActivity {
     private String direction_name;
     private int work_station_walk_time = 0;
 
-    private Button time_to_work_station_button;
-    private Button time_to_home_station_button;
+    private TextView time_to_work_station_text;
     private Button go_to_home_time_button;
-    private Button station_name_button;
+    private TextView station_name_text;
+    private TextView direction_text;
     private TextView leave_work_text;
     private TextView leave_home_text;
     private TextView train_come_work_text_1;
@@ -125,14 +125,17 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void setStationAndDirection() {
-        this.station_name_button = (Button)findViewById(R.id.work_station_name);
-        this.station_name_button.setText(this.work_station_name + " - " + this.direction_name);
+        this.station_name_text = (TextView)findViewById(R.id.work_station_name);
+        this.station_name_text.setText(this.work_station_name);
+
+        this.direction_text = (TextView)findViewById(R.id.work_station_direction);
+        this.direction_text.setText(this.direction_name);
         //this.station_name_button.setTextColor(Integer.parseInt(this.line,16));
     }
 
     public void setWalkTime() {
-        this.time_to_work_station_button = (Button) findViewById(R.id.time_to_work_station);
-        this.time_to_work_station_button.setText("Time needed to get to station: " + this.work_station_walk_time + " mins");
+        this.time_to_work_station_text = (TextView) findViewById(R.id.time_to_work_station);
+        this.time_to_work_station_text.setText("Time needed to get to station: " + this.work_station_walk_time + " mins");
     }
 
     public void gotoTimeSetting(View view) {
