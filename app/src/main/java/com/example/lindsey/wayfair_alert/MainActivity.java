@@ -1,6 +1,7 @@
 package com.example.lindsey.wayfair_alert;
 
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 
@@ -8,6 +9,7 @@ import android.os.AsyncTask;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.os.Vibrator;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.ActionBarActivity;
@@ -49,9 +51,6 @@ public class MainActivity extends ActionBarActivity {
         TrainInfo train_info = new TrainInfo();
         GenerateAlert ga = new GenerateAlert(train_info, this);
         timer.schedule(ga, 0, 5000);
-
-        Log.d("main:", train_info.notification);
-       // createNotification(train_info.notification);
     }
 
     @Override

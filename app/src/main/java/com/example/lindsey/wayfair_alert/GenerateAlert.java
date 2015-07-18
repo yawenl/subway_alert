@@ -1,8 +1,10 @@
 package com.example.lindsey.wayfair_alert;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.os.Vibrator;
 import android.preference.PreferenceManager;
 import android.text.format.Time;
 import android.util.Log;
@@ -49,13 +51,13 @@ public class GenerateAlert extends TimerTask{
 
             int hour = 15;
             int min = 0;
-            int walk_time = 5;
+            int walk_time = 8;
 
             int arrival_time = sharedPref.getInt("arrival_time", 0);
             int alert_start_time = (int)(base_time/1000) + (hour * 3600 + min * 60 - 180);
             int get_to_station = (int)(current_time/1000) + walk_time * 60;
-            int upper_bound = arrival_time + 15;
-            int lower_bound = arrival_time - 60;
+            int upper_bound = arrival_time;
+            int lower_bound = arrival_time - 240;
 
             Log.d("current time", ""+current_time);
             Log.d("alert time", ""+alert_start_time);
@@ -70,6 +72,9 @@ public class GenerateAlert extends TimerTask{
                 editor.commit();
             } else if (alert_start_time < current_time && (get_to_station > lower_bound && get_to_station < upper_bound)) {
                 Log.d("", "alert!!!!!");
+                Vibrator v = (Vibrator) main.getSystemService(Context.VIBRATOR_SERVICE);
+                // Vibrate for 500 milliseconds
+                v.vibrate(500);
                 main.createNotification(this.train_info.notification);
             }
 
@@ -97,7 +102,7 @@ public class GenerateAlert extends TimerTask{
 
                 String stop_id = json.getString("stop_id");
                 String stop_name = json.getString("stop_name");
-                String trip_name = "";
+                String trip_headsign = "";
                 JSONArray modes = json.getJSONArray("mode");
                 for (int i = 0; i < modes.length(); ++i) {
                     JSONObject mode = (JSONObject) modes.get(i);
@@ -115,7 +120,7 @@ public class GenerateAlert extends TimerTask{
                                 for (int m = 0; m < trips.length(); ++m) {
                                     JSONObject trip = (JSONObject) trips.get(i);
                                     predict_arrival_time = trip.getInt("pre_dt");
-                                    trip_name = trip.getString("trip_name");
+                                    trip_headsign = trip.getString("trip_headsign");
                                 }
                             }
                         }
@@ -123,7 +128,8 @@ public class GenerateAlert extends TimerTask{
                 }
 
 
-                generate_notification = trip_name + " will arrive soon " + new Date((long)predict_arrival_time * 1000).toString();
+                generate_notification = "Please leave in 3 minutes Train to " + trip_headsign + " will arrive at "
+                        + new Date((long)predict_arrival_time * 1000).getHours() + ":" + new Date((long)predict_arrival_time * 1000).getMinutes();
                 Log.d(TAG, json.toString());
             } catch (Exception e) {
                 e.printStackTrace();
