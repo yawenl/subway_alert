@@ -10,12 +10,6 @@ import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
 
-import com.parse.Parse;
-<<<<<<< HEAD
-import com.parse.ParseObject;
-=======
->>>>>>> rough layout
-
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -29,8 +23,6 @@ public class SubwayAlertApp extends Application {
     public void onCreate() {
         super.onCreate();
         //Initialize Parse API to initialize connection to cloud
-        Parse.enableLocalDatastore(this);
-        Parse.initialize(this, "J6Zjvn0eTBaH8idTVZFXCjnyOVBMg0175McsXNtD", "lsVIf14CSs17EqGHRl6Kfs9i9z9hfX1aCbzRuMu4");
 
         // register to be informed of activities starting up
         registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {

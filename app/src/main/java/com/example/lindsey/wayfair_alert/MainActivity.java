@@ -19,9 +19,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 
-import com.parse.ParseException;
-import com.parse.ParseUser;
-import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -135,11 +132,11 @@ public class MainActivity extends ActionBarActivity {
         return new AsyncTask<String, Void, String>() {
             @Override
             protected String doInBackground(String... params) {
-                try {
+               /* try {
                     ParseUser.logIn(params[0], params[1]);
                 } catch (ParseException e) {
                     return e.getMessage();
-                }
+                }*/
                 return null;
             }
 

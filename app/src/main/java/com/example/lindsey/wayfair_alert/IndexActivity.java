@@ -1,12 +1,14 @@
 package com.example.lindsey.wayfair_alert;
 
-import android.support.v7.app.ActionBarActivity;
+
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
 
 public class IndexActivity extends ActionBarActivity {
@@ -27,6 +29,14 @@ public class IndexActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_index);
+
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        //now get Editor
+        SharedPreferences.Editor editor = sharedPref.edit();
+        String userName = sharedPref.getString("isDismiss", "not dismissed");
+        //commits your edits
+        editor.commit();
+
         this.station_name_button = (Button)findViewById(R.id.station_name);
         this.go_to_work_time_button = (Button)findViewById(R.id.go_to_work_time);
         this.go_to_home_time_button = (Button)findViewById(R.id.go_to_home_time);
