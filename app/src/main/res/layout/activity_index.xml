@@ -8,46 +8,10 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Home Station Name"
-        android:id="@+id/home_station_name"
-        android:layout_gravity="center_horizontal"
-        android:onClick="gotoTimeSetting" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Train comes in: X mins"
-        android:id="@+id/train_arrive_time_home"
-        android:layout_gravity="center_horizontal" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="You should leave at: X mins"
-        android:id="@+id/person_leave_home"
-        android:layout_gravity="center_horizontal" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Go To Work Time"
-        android:id="@+id/go_to_work_time"
-        android:layout_gravity="center_horizontal" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Time from your location to the home station"
-        android:id="@+id/time_to_home_station" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Work Station Name"
+        android:text="Work Station Name+inbound/outbound"
         android:id="@+id/work_station_name"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:onClick="gotoStationSetting" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -57,26 +21,20 @@
         android:id="@+id/train_arrive_time_work"
         android:layout_gravity="center_horizontal" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="You should leave at: X mins"
-        android:id="@+id/person_leave_work"
-        android:layout_gravity="center_horizontal" />
-
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Time from your location to the work station"
         android:id="@+id/time_to_work_station"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:onClick="gotoTimeSetting" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Go To Home Time"
         android:id="@+id/go_to_home_time"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:onClick="gotoTimeSetting" />
 
 </LinearLayout>
