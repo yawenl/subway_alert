@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Vibrator;
 import android.preference.PreferenceManager;
+import android.text.Layout;
 import android.text.format.Time;
 import android.util.Log;
 
@@ -37,6 +38,7 @@ public class GenerateAlert extends TimerTask{
 
     public void run() {
         try {
+            int i = DirectionOptions.Inbound.ordinal();
             this.train_info.notification = (new GenerateNotification(main).execute(URL)).get();
             Log.d(TAG, this.train_info.notification);
             SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(main);
@@ -49,9 +51,15 @@ public class GenerateAlert extends TimerTask{
             date.setSeconds(0);
             long base_time = date.getTime();
 
-            int hour = 15;
-            int min = 0;
-            int walk_time = 8;
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putInt("walk_time", 10);
+            editor.putInt("user_hour", 15);
+            editor.putInt("user_minute", 0);
+            editor.commit();
+
+            int hour = sharedPref.getInt("user_hour", 0);
+            int min = sharedPref.getInt("user_minute", 0);
+            int walk_time = sharedPref.getInt("walk_time", 0);
 
             int arrival_time = sharedPref.getInt("arrival_time", 0);
             int alert_start_time = (int)(base_time/1000) + (hour * 3600 + min * 60 - 180);
@@ -67,13 +75,12 @@ public class GenerateAlert extends TimerTask{
 
             if (stop.equalsIgnoreCase("dismissed")) {
                 Thread.sleep(20000);
-                SharedPreferences.Editor editor = sharedPref.edit();
+                editor = sharedPref.edit();
                 editor.putString("isDismiss", "not dismissed");
                 editor.commit();
             } else if (alert_start_time < current_time && (get_to_station > lower_bound && get_to_station < upper_bound)) {
                 Log.d("", "alert!!!!!");
                 Vibrator v = (Vibrator) main.getSystemService(Context.VIBRATOR_SERVICE);
-                // Vibrate for 500 milliseconds
                 v.vibrate(500);
                 main.createNotification(this.train_info.notification);
             }
@@ -98,6 +105,8 @@ public class GenerateAlert extends TimerTask{
             JSONObject json = this.jsonParser.getJSONFromUrl(urls[0]);
             String generate_notification = "";
             int predict_arrival_time = 0;
+            SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(main);
+            SharedPreferences.Editor editor = sharedPref.edit();
             try {
 
                 String stop_id = json.getString("stop_id");
@@ -110,34 +119,59 @@ public class GenerateAlert extends TimerTask{
                     if (type == 1){
                         JSONArray routes = mode.getJSONArray("route");
                         for (int j = 0; j < routes.length(); ++j) {
-                            JSONObject route = (JSONObject) routes.get(i);
+                            JSONObject route = (JSONObject) routes.get(j);
                             String route_id = route.getString("route_id");
-                            JSONArray directions = route.getJSONArray("direction");
-                            for (int k = 0; k < directions.length(); ++k) {
-                                JSONObject direction = (JSONObject) directions.get(i);
-                                int direction_id = direction.getInt("direction_id");
-                                JSONArray trips = direction.getJSONArray("trip");
-                                for (int m = 0; m < trips.length(); ++m) {
-                                    JSONObject trip = (JSONObject) trips.get(i);
-                                    predict_arrival_time = trip.getInt("pre_dt");
-                                    trip_headsign = trip.getString("trip_headsign");
+                            if (route_id.equalsIgnoreCase("orange")) {
+                                JSONArray directions = route.getJSONArray("direction");
+                                for (int k = 0; k < directions.length(); ++k) {
+                                    JSONObject direction = (JSONObject) directions.get(k);
+                                    int direction_id = direction.getInt("direction_id");
+                                    JSONArray trips = direction.getJSONArray("trip");
+                                    if (direction_id == 0) {
+                                        for (int m = 0; m < trips.length(); ++m) {
+                                            JSONObject trip = (JSONObject) trips.get(m);
+                                            int current_time = (int)(System.currentTimeMillis()/1000);
+                                            int walk_time = sharedPref.getInt("walk_time", 0) * 60;
+                                            Log.d("in loop walk_time time", ""+walk_time);
+                                            Log.d("in loop current_time", ""+current_time);
+                                            if (current_time + walk_time + 60 < trip.getInt("pre_dt")) {
+                                                predict_arrival_time = trip.getInt("pre_dt");
+                                                trip_headsign = trip.getString("trip_headsign");
+                                                Log.d("in loop arrving time", ""+predict_arrival_time);
+                                                break;
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
                     }
                 }
 
+                int train_hour = new Date((long) predict_arrival_time * 1000).getHours();
+                int tran_minute = new Date((long)predict_arrival_time * 1000).getMinutes();
+                editor.putInt("train_hour", train_hour);
+                editor.putInt("train_minute", tran_minute);
+                editor.commit();
+
+                String print_minute = Integer.toString(tran_minute);
+                String print_hour = Integer.toString(train_hour);
+                if (tran_minute < 10) {
+                    print_minute = "0"+Integer.toString(tran_minute);
+                }
+                if (train_hour < 10) {
+                    print_hour = "0"+Integer.toString(train_hour);
+                }
 
                 generate_notification = "Please leave in 3 minutes Train to " + trip_headsign + " will arrive at "
-                        + new Date((long)predict_arrival_time * 1000).getHours() + ":" + new Date((long)predict_arrival_time * 1000).getMinutes();
+                        + print_hour + ":" + print_minute;
                 Log.d(TAG, json.toString());
             } catch (Exception e) {
                 e.printStackTrace();
                 generate_notification = "There is no train available now";
                 return generate_notification;
             }
-            SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(main);
-            SharedPreferences.Editor editor = sharedPref.edit();
+            
             editor.putInt("arrival_time", predict_arrival_time);
             editor.commit();
             return generate_notification;
