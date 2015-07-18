@@ -4,19 +4,20 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:name=".SubwayAlertApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme" >
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -37,6 +38,14 @@
         <activity
             android:name=".IndexActivity"
             android:label="@string/title_activity_index" >
+        </activity>
+        <activity
+            android:name=".SetStartTimeActivity"
+            android:label="@string/title_activity_set_start_time" >
+        </activity>
+        <activity
+            android:name=".SetStopAndDirectionActivity"
+            android:label="@string/title_activity_set_stop_and_direction" >
         </activity>
     </application>
 

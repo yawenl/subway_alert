@@ -141,6 +141,17 @@ public class GenerateAlert extends TimerTask{
                                                 break;
                                             }
                                         }
+
+                                        for (int m = 0; m < 2 && m < trips.length(); ++m) {
+                                            JSONObject trip = (JSONObject) trips.get(m);
+                                            int next_arrival_time = trip.getInt("pre_dt");
+                                            if (m == 0) {
+                                                editor.putInt("next_train", next_arrival_time);
+                                            } else if (m == 1) {
+                                                editor.putInt("next_next_train", next_arrival_time);
+                                            }
+                                        }
+                                        editor.commit();
                                     }
                                 }
                             }
@@ -150,9 +161,6 @@ public class GenerateAlert extends TimerTask{
 
                 int train_hour = new Date((long) predict_arrival_time * 1000).getHours();
                 int tran_minute = new Date((long)predict_arrival_time * 1000).getMinutes();
-                editor.putInt("train_hour", train_hour);
-                editor.putInt("train_minute", tran_minute);
-                editor.commit();
 
                 String print_minute = Integer.toString(tran_minute);
                 String print_hour = Integer.toString(train_hour);
