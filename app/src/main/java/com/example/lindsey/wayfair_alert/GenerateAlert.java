@@ -52,20 +52,24 @@ public class GenerateAlert extends TimerTask{
             long base_time = date.getTime();
 
             SharedPreferences.Editor editor = sharedPref.edit();
-            editor.putInt("walk_time", 10);
-            editor.putInt("user_hour", 15);
-            editor.putInt("user_minute", 0);
-            editor.commit();
 
-            int hour = sharedPref.getInt("user_hour", 0);
-            int min = sharedPref.getInt("user_minute", 0);
-            int walk_time = sharedPref.getInt("walk_time", 0);
+            int hour = sharedPref.getInt("workHour", 18);
+            int min = sharedPref.getInt("workMinute", 0);
+            int walk_time = sharedPref.getInt("walk_time", 5);
+            String line = sharedPref.getString("line", "default");
+            int direction = sharedPref.getInt("direction", 12);
+
+            Log.d("hour", ""+hour);
+            Log.d("min", ""+min);
+            Log.d("line", line);
+            Log.d("direction", ""+direction);
 
             int arrival_time = sharedPref.getInt("arrival_time", 0);
             int alert_start_time = (int)(base_time/1000) + (hour * 3600 + min * 60 - 180);
             int get_to_station = (int)(current_time/1000) + walk_time * 60;
             int upper_bound = arrival_time;
             int lower_bound = arrival_time - 240;
+
 
             Log.d("current time", ""+current_time);
             Log.d("alert time", ""+alert_start_time);
