@@ -33,6 +33,10 @@
             android:name=".SnoozeNotifier"
             android:label="@string/snooze_notifier" >
         </activity>
+        <activity
+            android:name=".IndexActivity"
+            android:label="@string/title_activity_index" >
+        </activity>
     </application>
 
 </manifest>

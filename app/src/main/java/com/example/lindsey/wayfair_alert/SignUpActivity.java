@@ -3,17 +3,12 @@ package com.example.lindsey.wayfair_alert;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-
-import com.parse.ParseException;
-import com.parse.ParseUser;
-
-import com.example.lindsey.wayfair_alert.Utility;
 
 
 public class SignUpActivity extends ActionBarActivity {
@@ -71,7 +66,7 @@ public class SignUpActivity extends ActionBarActivity {
         return new AsyncTask<String, Void, String>() {
             @Override
             protected String doInBackground(String... params) {
-                ParseUser user = new ParseUser();
+                /*ParseUser user = new ParseUser();
                 user.setUsername(params[0]);
                 user.setPassword(params[1]);
                 //user.setEmail("email@example.com");
@@ -81,7 +76,7 @@ public class SignUpActivity extends ActionBarActivity {
                     user.signUp();
                 } catch (ParseException e) {
                     return e.getMessage();
-                }
+                }*/
                 return null;
             }
 
