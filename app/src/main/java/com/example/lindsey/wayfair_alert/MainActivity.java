@@ -99,12 +99,15 @@ public class MainActivity extends ActionBarActivity {
         //this.home_station_walk_time = sharedPref.getInt("home_station_walk_time", 5);
         this.work_station_walk_time = sharedPref.getInt("work_station_walk_time", 5);
         this.work_station_name = StationOptions.values()[sharedPref.getInt("station", 0)].toString();
+
+        Log.d("aaaaaaa", StationOptions.values()[sharedPref.getInt("station", 0)].toString());
         this.direction_name = DirectionOptions.values()[sharedPref.getInt("direction", 0)].toString();
         this.line = color_map.get(sharedPref.getInt("line", 0));
-        this.train_arrive_work_station_hour_1 = new Date((long)sharedPref.getInt("next_next_train",0)).getHours();
-        this.train_arrive_work_station_min_1 = new Date((long)sharedPref.getInt("next_next_train",0)).getMinutes();
-        this.train_arrive_work_station_hour_2 = new Date((long)sharedPref.getInt("next_next_train",0)).getHours();
-        this.train_arrive_work_station_min_2 = new Date((long)sharedPref.getInt("next_next_train",0)).getMinutes();
+        Log.d("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",this.line);
+        this.train_arrive_work_station_hour_1 = new Date((long)sharedPref.getInt("next_next_train",0)*1000).getHours();
+        this.train_arrive_work_station_min_1 = new Date((long)sharedPref.getInt("next_next_train",0)*1000).getMinutes();
+        this.train_arrive_work_station_hour_2 = new Date((long)sharedPref.getInt("next_next_train",0)*1000).getHours();
+        this.train_arrive_work_station_min_2 = new Date((long)sharedPref.getInt("next_next_train",0)*1000).getMinutes();
 
     }
 
@@ -124,7 +127,7 @@ public class MainActivity extends ActionBarActivity {
     public void setStationAndDirection() {
         this.station_name_button = (Button)findViewById(R.id.work_station_name);
         this.station_name_button.setText(this.work_station_name + " - " + this.direction_name);
-        this.station_name_button.setTextColor(Integer.parseInt(this.line,16));
+        //this.station_name_button.setTextColor(Integer.parseInt(this.line,16));
     }
 
     public void setWalkTime() {
