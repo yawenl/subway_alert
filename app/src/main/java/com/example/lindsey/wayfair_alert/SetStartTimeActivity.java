@@ -1,5 +1,6 @@
 package com.example.lindsey.wayfair_alert;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -10,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TimePicker;
+
 
 
 public class SetStartTimeActivity extends ActionBarActivity {
@@ -81,11 +83,10 @@ public class SetStartTimeActivity extends ActionBarActivity {
         int timeEWorkToStation = Integer.parseInt(((EditText)this.findViewById(R.id.eWorkToStation)).getText().toString());
         editor.putInt("eWorkToStation", timeEWorkToStation);
 
-
         editor.commit();
 
-        Intent intent = new Intent(this, SetStopAndDirectionActivity.class);
-        startActivity(intent);
+        Intent intent_main = new Intent(this, MainActivity.class);
+        startActivity(intent_main);
 
         finish();
         return;
