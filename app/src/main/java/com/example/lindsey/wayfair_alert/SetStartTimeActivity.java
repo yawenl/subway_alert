@@ -95,6 +95,9 @@ public class SetStartTimeActivity extends ActionBarActivity {
 
         editor.commit();
 
+        Intent intent = new Intent(this, SetStopAndDirectionActivity.class);
+        startActivity(intent);
+
         finish();
         return;
     }
