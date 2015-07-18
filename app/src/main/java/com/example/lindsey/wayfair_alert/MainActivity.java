@@ -150,8 +150,6 @@ public class MainActivity extends ActionBarActivity {
             protected void onPostExecute(String errorMsg) {
                 progressBar.setVisibility(View.GONE);
                 if (errorMsg == null) { //login success then launch main activity
-                    Intent mainIntent = new Intent(MainActivity.this, IndexActivity.class);
-                    startActivity(mainIntent);
                     finish();
                 } else {
                     Log.d("MyApp", errorMsg);
