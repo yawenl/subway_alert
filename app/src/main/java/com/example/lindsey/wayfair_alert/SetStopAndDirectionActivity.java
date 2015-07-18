@@ -11,7 +11,7 @@ import android.view.View;
 import android.widget.NumberPicker;
 
 import enumPackage.DirectionOptions;
-import enumPackage.LineOpitons;
+import enumPackage.LineOptions;
 import enumPackage.StationOptions;
 
 
@@ -67,11 +67,11 @@ public class SetStopAndDirectionActivity extends ActionBarActivity {
     private void linePicker(){
         NumberPicker linePick = (NumberPicker) this.findViewById(R.id.linePicker);
         linePick.setMinValue(0);
-        linePick.setMaxValue(LineOpitons.values().length - 1);
+        linePick.setMaxValue(LineOptions.values().length - 1);
 
-        String [] line = new String[LineOpitons.values().length];
-        for(int i = 0; i < LineOpitons.values().length; i++){
-            line[i] = LineOpitons.values()[i].toString();
+        String [] line = new String[LineOptions.values().length];
+        for(int i = 0; i < LineOptions.values().length; i++){
+            line[i] = LineOptions.values()[i].toString();
         }
 
         linePick.setDisplayedValues(line);
@@ -113,12 +113,16 @@ public class SetStopAndDirectionActivity extends ActionBarActivity {
         NumberPicker directionPicker = (NumberPicker) this.findViewById(R.id.directionPicker);
         int direction = directionPicker.getValue();
 
+        String a = LineOptions.values()[line].toString();
+
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt("line", line);
         editor.putInt("station", station);
         editor.putInt("direction", direction);
-
+        Log.d("asdfa", line + "");
+        Log.d("dfdfd", station + "");
+        Log.d("ass", direction + "");
         editor.commit();
 
         finish();
