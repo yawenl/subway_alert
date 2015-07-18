@@ -1,7 +1,5 @@
 .idea
 .gradle
 local.properties
-<<<<<<< HEAD
 build/
-=======
->>>>>>> rough layout
+.psd
