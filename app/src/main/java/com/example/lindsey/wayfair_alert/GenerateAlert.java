@@ -13,6 +13,8 @@ import java.util.TimerTask;
 import com.example.lindsey.wayfair_alert.JSONParser;
 import com.example.lindsey.wayfair_alert.MainActivity;
 
+import enumPackage.DirectionOptions;
+
 /**
  * Created by dameng on 7/18/2015.
  */
