@@ -89,9 +89,16 @@
     <orderEntry type="library" exported="" name="Parse-1.9.4" level="project" />
     <orderEntry type="library" exported="" name="bolts-android-1.2.0" level="project" />
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     <orderEntry type="library" exported="" name="volley" level="project" />
 >>>>>>> da_code
+=======
+<<<<<<< Updated upstream
+=======
+    <orderEntry type="library" exported="" name="volley" level="project" />
+>>>>>>> Stashed changes
+>>>>>>> 5fa4a992f60cc46954fd2527ef78a74959dd1ef1
     <orderEntry type="library" exported="" name="support-v4-22.1.1" level="project" />
     <orderEntry type="library" exported="" name="support-annotations-22.1.1" level="project" />
   </component>

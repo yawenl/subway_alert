@@ -1,9 +1,15 @@
 package com.example.lindsey.wayfair_alert;
 
-import android.content.Intent;
+
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 
 import android.os.AsyncTask;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Intent;
+import android.preference.PreferenceManager;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,7 +26,6 @@ import android.widget.TextView;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-
 public class MainActivity extends ActionBarActivity {
 
     private ProgressBar progressBar;
@@ -29,7 +34,7 @@ public class MainActivity extends ActionBarActivity {
     // change this to the IP of another host if required
     private static String ageURL = "https://raw.githubusercontent.com/dm37537/Career-Matcher/master/App/test.json";
     private static String TAG = MainActivity.class.getSimpleName();
-    protected TextView Results;
+    protected String notification;
     protected JSONObject json;
 
     @Override
@@ -44,8 +49,63 @@ public class MainActivity extends ActionBarActivity {
         progressBar = (ProgressBar) findViewById(R.id.spinner);
 
         jsonParser = new JSONParser();
-        Results = (TextView) findViewById(R.id.txtResponse);
-        new GenerateNotification(ageURL).execute();
+        try {
+            this.notification = (new GenerateNotification(ageURL).execute()).get();
+        }catch (Exception e) {
+            
+        }
+
+        Log.d(TAG, this.notification);
+        createNotification(this.notification);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d("ActivityLifeCycleDemo", "onResume");
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        String userName = sharedPref.getString("isDismiss", "not dismissed");
+
+        Log.d("", userName);
+    }
+
+    public NotificationCompat.Builder createNotification(String notification) {
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this)
+                .setSmallIcon(R.drawable.alert)
+                .setContentTitle("Subway Alert:")
+                .setContentText(notification)
+                .setAutoCancel(true)
+                .setStyle(new NotificationCompat.BigTextStyle().bigText(notification));
+        //go to activity
+        Intent resultIntent = new Intent(this, MainActivity.class);
+        PendingIntent resultPendingIntent =
+                PendingIntent.getActivity(
+                        this,
+                        0,
+                        resultIntent,
+                        PendingIntent.FLAG_UPDATE_CURRENT
+                );
+        mBuilder.setContentIntent(resultPendingIntent);
+
+        //dismiss
+        int mNotificationId = 001;
+        Intent dismissIntent = new Intent(this, DismissNotifier.class);
+        dismissIntent.putExtra("notificationID", mNotificationId);
+        PendingIntent dismissPIntent = PendingIntent.getActivity(this, 0, dismissIntent, 0);
+
+        //snooze
+        Intent snoozeIntent = new Intent(this, SnoozeNotifier.class);
+        snoozeIntent.putExtra("notificationID", mNotificationId);
+        PendingIntent snoozePIntent = PendingIntent.getActivity(this, 0, snoozeIntent, 0);
+
+        //add to notification builder
+        mBuilder.addAction(R.drawable.no, "dismiss", dismissPIntent);
+        mBuilder.addAction(R.drawable.snooze, "snooze", snoozePIntent);
+
+        NotificationManager mNotifyMgr = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        mNotifyMgr.notify(mNotificationId, mBuilder.build());
+
+        return mBuilder;
     }
 
     /**
@@ -115,7 +175,7 @@ public class MainActivity extends ActionBarActivity {
         }
         protected String doInBackground(String... urls) {
             json = jsonParser.getJSONFromUrl(this.url);
-            String notification = "";
+            String generate_notification = "";
             try {
                 int predict_arrival_time = 0;
                 String stop_id = json.getString("stop_id");
@@ -145,16 +205,15 @@ public class MainActivity extends ActionBarActivity {
                     }
                 }
 
-                notification = "Train from " + trip_name + " will arrive soon";
+                generate_notification = "Train from " + trip_name + " will arrive soon";
                 Log.d(TAG, json.toString());
-                Log.d(TAG, notification);
+                Log.d(TAG, generate_notification);
             } catch (Exception e) {
                 e.printStackTrace();
-                Results.setText("There is no train available now");
-                return "";
+                generate_notification = "There is no train available now";
+                return generate_notification;
             }
-            Results.setText(notification);
-            return notification;
+            return generate_notification;
         }
     }
 
