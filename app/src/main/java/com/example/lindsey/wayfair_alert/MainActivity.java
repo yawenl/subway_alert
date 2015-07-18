@@ -5,17 +5,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.graphics.Typeface;
-
-import android.os.AsyncTask;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Intent;
-import android.os.Vibrator;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.ActionBarActivity;
@@ -87,7 +77,7 @@ public class MainActivity extends ActionBarActivity {
         setTrainArriveTime();
         setWorkEndWorkTime();
         setStationAndDirection();
-        //setWalkTime();
+        setWalkTime();
         Log.d("main:", train_info.notification);
        // createNotification(train_info.notification);
     }
@@ -186,37 +176,6 @@ public class MainActivity extends ActionBarActivity {
         mNotifyMgr.notify(mNotificationId, mBuilder.build());
 
         return mBuilder;
-    }
-
-    /**
-     * Private function that creates an async task for login.
-     * @return AsyncTask
-     */
-    private AsyncTask<String, Void, String> createLoginAsyncTask() {
-
-        return new AsyncTask<String, Void, String>() {
-            @Override
-            protected String doInBackground(String... params) {
-               /* try {
-                    ParseUser.logIn(params[0], params[1]);
-                } catch (ParseException e) {
-                    return e.getMessage();
-                }*/
-                return null;
-            }
-
-            /**
-             * Called on UI thread to perform the UI updates after the login operation finishes
-             * in the backend.
-             * @param errorMsg The returned string for a possible login error. A value of null
-             *                 indicates login success.
-             */
-            @Override
-            protected void onPostExecute(String errorMsg) {
-                progressBar.setVisibility(View.GONE);
-                    finish();
-            }
-        };
     }
 
 
