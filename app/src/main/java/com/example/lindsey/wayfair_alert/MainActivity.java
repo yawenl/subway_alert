@@ -19,9 +19,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 
-import com.parse.ParseException;
-import com.parse.ParseUser;
-
 import java.util.Timer;
 
 public class MainActivity extends ActionBarActivity {
@@ -133,11 +130,11 @@ public class MainActivity extends ActionBarActivity {
         return new AsyncTask<String, Void, String>() {
             @Override
             protected String doInBackground(String... params) {
-                try {
+               /* try {
                     ParseUser.logIn(params[0], params[1]);
                 } catch (ParseException e) {
                     return e.getMessage();
-                }
+                }*/
                 return null;
             }
 
@@ -151,8 +148,6 @@ public class MainActivity extends ActionBarActivity {
             protected void onPostExecute(String errorMsg) {
                 progressBar.setVisibility(View.GONE);
                 if (errorMsg == null) { //login success then launch main activity
-                    Intent mainIntent = new Intent(MainActivity.this, IndexPageActivity.class);
-                    startActivity(mainIntent);
                     finish();
                 } else {
                     Log.d("MyApp", errorMsg);
