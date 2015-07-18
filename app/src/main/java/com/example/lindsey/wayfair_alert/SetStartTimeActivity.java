@@ -6,11 +6,13 @@ import android.preference.PreferenceManager;
 import android.content.SharedPreferences;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TimePicker;
 
 import org.json.JSONObject;
@@ -70,9 +72,28 @@ public class SetStartTimeActivity extends ActionBarActivity {
         editor.putInt("workMinute", workMinute);
         editor.putInt("homeHour", homeHour);
         editor.putInt("homeMinute", homeMinute);
+
+        EditText eHomeToStationEditText = (EditText)this.findViewById(R.id.eHomeToStation);
+        // check content
+        if(TextUtils.isEmpty(eHomeToStationEditText.getText())){
+           eHomeToStationEditText.setError("Estimate Time could not be empty");
+        }
+
+
+        EditText eWorkToStationEditText = (EditText)this.findViewById(R.id.eWorkToStation);
+        if(TextUtils.isEmpty(eWorkToStationEditText.getText())){
+            eWorkToStationEditText.setError("Estimate Time could not be empty");
+        }
+
+
+        int timeEHomeToStation = Integer.parseInt(((EditText)this.findViewById(R.id.eHomeToStation)).getText().toString());
+        editor.putInt("eHomeToStation", timeEHomeToStation);
+
+        int timeEWorkToStation = Integer.parseInt(((EditText)this.findViewById(R.id.eWorkToStation)).getText().toString());
+        editor.putInt("eWorkToStation", timeEWorkToStation);
+
+
         editor.commit();
-
-
 
         finish();
         return;
