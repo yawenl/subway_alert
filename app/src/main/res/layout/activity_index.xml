@@ -1,40 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:weightSum="1">
+    android:layout_width="fill_parent" android:layout_height="fill_parent"
+    android:id="@+id/layoutContainer" android:orientation="horizontal">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Work Station Name+inbound/outbound"
-        android:id="@+id/work_station_name"
-        android:layout_gravity="center_horizontal"
-        android:onClick="gotoStationSetting" />
+    <RelativeLayout
+        android:layout_width="0dip"
+        android:layout_height="fill_parent"
+        android:layout_weight="0.7">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Train comes in: X mins"
-        android:id="@+id/train_arrive_time_work"
-        android:layout_gravity="center_horizontal" />
+        <!-- This is the part that's 70% of the total width. I'm inserting a LinearLayout and buttons.-->
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="vertical">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Time from your location to the work station"
-        android:id="@+id/time_to_work_station"
-        android:layout_gravity="center_horizontal"
-        android:onClick="gotoTimeSetting" />
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Work Station Name+inbound/outbound"
+                android:background="@android:color/white"
+                android:id="@+id/work_station_name"
+                android:layout_gravity="center_horizontal"
+                android:onClick="gotoStationSetting" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Go To Home Time"
-        android:id="@+id/go_to_home_time"
-        android:layout_gravity="center_horizontal"
-        android:onClick="gotoTimeSetting" />
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:background="@android:color/white"
+                android:text="Train comes in: X mins"
+                android:id="@+id/train_arrive_time_work"
+                android:layout_gravity="center_horizontal" />
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                android:text="Time from your location to the work station"
+                android:id="@+id/time_to_work_station"
+                android:layout_gravity="center_horizontal"
+                android:onClick="gotoTimeSetting" />
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                android:text="Go To Home Time"
+                android:id="@+id/go_to_home_time"
+                android:layout_gravity="center_horizontal"
+                android:onClick="gotoTimeSetting" />
+
+        </LinearLayout>
+        <!-- 70% Width End-->
+
+    </RelativeLayout>
+
 
 </LinearLayout>
