@@ -11,7 +11,10 @@ import android.util.Base64;
 import android.util.Log;
 
 import com.parse.Parse;
+<<<<<<< HEAD
 import com.parse.ParseObject;
+=======
+>>>>>>> rough layout
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

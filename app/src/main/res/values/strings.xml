@@ -3,7 +3,11 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+<<<<<<< HEAD
     <string name="title_activity_sign_up">SignUpActivity</string>
     <string name="dismiss_notifier">DismissNotifier</string>
     <string name="snooze_notifier">DismissNotifier</string>
+=======
+    <string name="title_activity_index">IndexActivity</string>
+>>>>>>> rough layout
 </resources>
