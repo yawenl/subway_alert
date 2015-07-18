@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:background="#1E283B"
+
+android:layout_width="match_parent" android:layout_height="match_parent">
+
+
+<ImageView
+    android:layout_width="200dp"
+    android:layout_height="200dp"
+    android:id="@+id/icon"
+    android:src="@drawable/img3"
+    android:layout_alignParentTop="true"
+    android:layout_centerHorizontal="true" />
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="MBTA Alarm"
+    style="@style/Base.V21.Theme.AppCompat"
+    android:id="@+id/name"
+    android:textColor="#FF3456"
+    android:textSize="30sp"
+    android:textAlignment="center"
+    android:layout_alignBottom="@+id/icon"
+    android:layout_centerHorizontal="true" />
+
+<EditText
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:inputType="text"
+    android:ems="10"
+    android:id="@+id/uname"
+    android:hint="Enter your username"
+    android:textColorHint="@color/primary_dark_material_light"
+    android:layout_centerVertical="true"
+    android:layout_centerHorizontal="true"
+    android:layout_marginTop="1dp"
+    android:layout_alignStart="@+id/icon"
+    android:layout_alignEnd="@+id/icon"
+    android:layout_alignLeft="@+id/icon"
+    android:layout_alignRight="@+id/icon"
+    android:textColor="#FFFFFF" />
+
+<EditText
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:inputType="textPassword"
+    android:ems="10"
+    android:id="@+id/pword"
+    android:hint="Enter your password"
+    android:textColorHint="@color/primary_dark_material_light"
+    android:layout_below="@+id/uname"
+    android:layout_centerVertical="true"
+    android:layout_centerHorizontal="true"
+    android:layout_alignStart="@+id/uname"
+    android:layout_alignEnd="@+id/uname"
+    android:layout_alignLeft="@+id/uname"
+    android:layout_alignRight="@+id/uname"
+    android:layout_marginTop="25dp"
+    android:textColor="#FFFFFF" />
+
+<EditText
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:inputType="textPassword"
+    android:ems="10"
+    android:id="@+id/pword2"
+    android:typeface="serif"
+    android:hint="Confirm your password"
+    android:textColorHint="@color/primary_dark_material_light"
+    android:layout_marginTop="25dp"
+    android:layout_below="@+id/pword"
+    android:layout_centerVertical="true"
+    android:layout_centerHorizontal="true"
+    android:layout_alignStart="@+id/pword"
+    android:layout_alignEnd="@+id/pword"
+    android:layout_alignLeft="@+id/pword"
+    android:layout_alignRight="@+id/pword"
+    android:textColor="#FFFFFF" />
+
+<Button
+    android:layout_width="100dp"
+    android:layout_height="50dp"
+    android:text="CANCEL"
+    android:id="@+id/cancel"
+    android:background="?android:attr/selectableItemBackground"
+    android:textColor="#FFFFFF"
+    android:textSize="25sp"
+    android:layout_below="@+id/pword2"
+    android:layout_marginTop="34dp"
+    android:layout_alignStart="@+id/pword2"
+    android:layout_alignLeft="@+id/pword2"
+    android:onClick="gotoLogin" />
+
+<Button
+    android:layout_width="100dp"
+    android:layout_height="50dp"
+    android:text="SIGN UP"
+    android:id="@+id/signup"
+    android:background="?android:attr/selectableItemBackground"
+    android:textColor="#FFFFFF"
+    android:textSize="25sp"
+    android:layout_alignTop="@+id/cancel"
+    android:layout_alignEnd="@+id/pword2"
+    android:layout_alignRight="@+id/pword2"
+    android:onClick="signUp" />
+
+<ProgressBar
+    android:id="@+id/spinner"
+    style="?android:attr/progressBarStyleLarge"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerHorizontal="true"
+    android:layout_centerVertical="true"
+    android:layout_centerInParent="true"
+    android:visibility="gone" />
+
+</RelativeLayout>

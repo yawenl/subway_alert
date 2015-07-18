@@ -6,63 +6,79 @@ import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 
-import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 
-import java.util.Arrays;
-import java.util.List;
+import com.example.lindsey.wayfair_alert.Utility;
 
 
-public class MainActivity extends ActionBarActivity {
-
+public class SignUpActivity extends ActionBarActivity {
     private ProgressBar progressBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_sign_up);
 
         //Fix the issue Android changes the font of password fields into monospace
         EditText passField = (EditText) findViewById(R.id.pword);
+        EditText passVerifyField = (EditText) findViewById(R.id.pword2);
         passField.setTypeface(Typeface.DEFAULT);
+        passVerifyField.setTypeface(Typeface.DEFAULT);
 
         progressBar = (ProgressBar) findViewById(R.id.spinner);
     }
 
     /**
-     * Callback function for the Login Button. Synchronously signs in the user.
+     * Callback function for the SignUp Button. Synchronously signs up the user
+     * with the Parse API.
      * @param view
      */
-    public void logIn(View view) {
-        //prevent multiple login clicks
+    public void signUp(View view) {
+        //prevent multiple signup clicks
         if (progressBar.getVisibility() == View.VISIBLE)
             return;
         progressBar.setVisibility(View.VISIBLE);
 
         EditText usernameField = (EditText) findViewById(R.id.uname);
         EditText passField = (EditText) findViewById(R.id.pword);
+        EditText passVerifyField = (EditText) findViewById(R.id.pword2);
 
-        //Use AsyncTask to enable built-in Espresso support for testing async operations
-        AsyncTask<String, Void, String> loginTask = createLoginAsyncTask();
-        loginTask.execute(usernameField.getText().toString(), passField.getText().toString());
+        String username = usernameField.getText().toString();
+        String pass = passField.getText().toString();
+        String verifyPass = passVerifyField.getText().toString();
+
+        if (username.equals("") || pass.equals("") ||
+                verifyPass.equals("") || !verifyPass.equals(pass)) {
+            Utility.warningDialog(this, "Bad Input", "Username/Password is not in correct format.");
+            progressBar.setVisibility(View.GONE);
+            return;
+        }
+
+        AsyncTask<String, Void, String> signUpTask = createSignUpAsyncTask();
+        signUpTask.execute(username, pass);
     }
 
     /**
-     * Private function that creates an async task for login.
+     * Private function that creates an async task for sign up.
      * @return AsyncTask
      */
-    private AsyncTask<String, Void, String> createLoginAsyncTask() {
+    private AsyncTask<String, Void, String> createSignUpAsyncTask() {
         return new AsyncTask<String, Void, String>() {
             @Override
             protected String doInBackground(String... params) {
+                ParseUser user = new ParseUser();
+                user.setUsername(params[0]);
+                user.setPassword(params[1]);
+                //user.setEmail("email@example.com");
+                //user.put("phone", "650-555-0000");
+
                 try {
-                    ParseUser.logIn(params[0], params[1]);
+                    user.signUp();
                 } catch (ParseException e) {
                     return e.getMessage();
                 }
@@ -79,46 +95,25 @@ public class MainActivity extends ActionBarActivity {
             protected void onPostExecute(String errorMsg) {
                 progressBar.setVisibility(View.GONE);
                 if (errorMsg == null) { //login success then launch main activity
-                    Intent mainIntent = new Intent(MainActivity.this, IndexPageActivity.class);
+                    Intent mainIntent = new Intent(SignUpActivity.this, MainActivity.class);
                     startActivity(mainIntent);
                     finish();
                 } else {
                     Log.d("MyApp", errorMsg);
-                    Utility.warningDialog(MainActivity.this, "Login Failed", errorMsg);
+                    Utility.warningDialog(SignUpActivity.this, "SignUp Failed", errorMsg);
                 }
             }
         };
     }
 
     /**
-     * Callback function for signUp button. Triggers an Intent to go to the SignUpActivity.
+     * Callback function for the Login button. Triggers an Intent
+     * to go to LoginActivity.
      * @param view
      */
-    public void gotoSignUp(View view) {
-        Intent signUpIntent = new Intent(this, SignUpActivity.class);
-        startActivity(signUpIntent);
-        finish();   //destroy activity to prevent going back to sign-in screen
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+    public void gotoLogin(View view) {
+        Intent loginIntent = new Intent(this, MainActivity.class);
+        startActivity(loginIntent);
+        finish();   //destroy activity to prevent going back to sign-up screen
     }
 }
