@@ -108,16 +108,16 @@ public class SetStopAndDirectionActivity extends ActionBarActivity {
         int line = linePicker.getValue();
 
         NumberPicker stationPicker = (NumberPicker) this.findViewById(R.id.stationPicker);
-        String station = StationOptions.values()[stationPicker.getValue()].toString();
+        int station = stationPicker.getValue();
 
         NumberPicker directionPicker = (NumberPicker) this.findViewById(R.id.directionPicker);
-        String direction = DirectionOptions.values()[directionPicker.getValue()].toString();
+        int direction = directionPicker.getValue();
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt("line", line);
-        editor.putString("station", station);
-        editor.putString("direction", direction);
+        editor.putInt("station", station);
+        editor.putInt("direction", direction);
 
         editor.commit();
 
