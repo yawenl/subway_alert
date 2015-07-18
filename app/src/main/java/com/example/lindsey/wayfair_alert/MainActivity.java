@@ -69,8 +69,7 @@ public class MainActivity extends ActionBarActivity {
     public NotificationCompat.Builder createNotification(String notification) {
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.drawable.alert)
-                .setColor(android.graphics.Color.rgb(255,151,81))
-                .setContentTitle("When To Go")
+                .setContentTitle("Subway Alert:")
                 .setContentText(notification)
                 .setAutoCancel(true)
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(notification));
