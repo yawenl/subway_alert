@@ -35,7 +35,6 @@ public class MainActivity extends ActionBarActivity {
         passField.setTypeface(Typeface.DEFAULT);
 
         progressBar = (ProgressBar) findViewById(R.id.spinner);
-
         createNotification(20);
     }
 
