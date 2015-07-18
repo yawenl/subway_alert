@@ -151,6 +151,7 @@ public class GenerateAlert extends TimerTask{
                                                 editor.putInt("next_next_train", next_arrival_time);
                                             }
                                         }
+                                        editor.commit();
                                     }
                                 }
                             }
@@ -160,9 +161,6 @@ public class GenerateAlert extends TimerTask{
 
                 int train_hour = new Date((long) predict_arrival_time * 1000).getHours();
                 int tran_minute = new Date((long)predict_arrival_time * 1000).getMinutes();
-                editor.putInt("train_hour", train_hour);
-                editor.putInt("train_minute", tran_minute);
-                editor.commit();
 
                 String print_minute = Integer.toString(tran_minute);
                 String print_hour = Integer.toString(train_hour);
