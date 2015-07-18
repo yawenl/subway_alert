@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/Lindsey/AndroidStudioProjects/subway_alert/app/libs/ParseFacebookUtilsV4-1.9.4.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="d0490b697e2ff12e81b214d17f166534dfd3bced">
+        <dex dex="/Users/Lindsey/AndroidStudioProjects/subway_alert/app/build/intermediates/pre-dexed/debug/ParseFacebookUtilsV4-1.9.4-ea3e7d788344f0997c9806ed4e3317cf5b1739ac.jar" />
+    </item>
+    <item
+        jar="/Users/Lindsey/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/22.1.1/support-annotations-22.1.1.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="01d051a6bfb1218b1db2d3a5af0480ac2c25c42a">
+        <dex dex="/Users/Lindsey/AndroidStudioProjects/subway_alert/app/build/intermediates/pre-dexed/debug/support-annotations-22.1.1-d13143a1c79ca91d8e22bc1579cdd1fb7698dfcb.jar" />
+    </item>
+    <item
+        jar="/Users/Lindsey/AndroidStudioProjects/subway_alert/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.1.1/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="c95ba8152923e4872e86a82cfcba9a51c0214328">
+        <dex dex="/Users/Lindsey/AndroidStudioProjects/subway_alert/app/build/intermediates/pre-dexed/debug/classes-5c8e6b74e0105669939eda6849840e9af9fbae50.jar" />
+    </item>
+    <item
+        jar="/Users/Lindsey/AndroidStudioProjects/subway_alert/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.1.1/libs/internal_impl-22.1.1.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="9e070ad32b2700b0343e8e0cccc437733d91ba3a">
+        <dex dex="/Users/Lindsey/AndroidStudioProjects/subway_alert/app/build/intermediates/pre-dexed/debug/internal_impl-22.1.1-b0dfb8b0fd4e4bb0c68418d67c48ca3b7c3e2c1e.jar" />
+    </item>
+    <item
+        jar="/Users/Lindsey/.gradle/caches/modules-2/files-2.1/com.parse.bolts/bolts-android/1.2.0/6ee2953ccf51ce72b6d548c30c4633b99eb4f9dd/bolts-android-1.2.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="6ee2953ccf51ce72b6d548c30c4633b99eb4f9dd">
+        <dex dex="/Users/Lindsey/AndroidStudioProjects/subway_alert/app/build/intermediates/pre-dexed/debug/bolts-android-1.2.0-40f25f3e3a52047380d7ee661e1413b3e15f9518.jar" />
+    </item>
+    <item
+        jar="/Users/Lindsey/AndroidStudioProjects/subway_alert/app/libs/ParseCrashReporting-1.9.4.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="7a11f2d74111fd9b02c2d091a1b76b82f6a4357e">
+        <dex dex="/Users/Lindsey/AndroidStudioProjects/subway_alert/app/build/intermediates/pre-dexed/debug/ParseCrashReporting-1.9.4-254957d5c83e77d5df4100f13b646e99f9e58604.jar" />
+    </item>
+    <item
+        jar="/Users/Lindsey/AndroidStudioProjects/subway_alert/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.1/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="a3ff3c506644c820eb2bdf06e8339f72be578551">
+        <dex dex="/Users/Lindsey/AndroidStudioProjects/subway_alert/app/build/intermediates/pre-dexed/debug/classes-5af69a8c44dd35e4a09ea08f454383e4284683e6.jar" />
+    </item>
+    <item
+        jar="/Users/Lindsey/AndroidStudioProjects/subway_alert/app/libs/Parse-1.9.4.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="56c22930b5d4f77015b6a40c7f14103d3e101001">
+        <dex dex="/Users/Lindsey/AndroidStudioProjects/subway_alert/app/build/intermediates/pre-dexed/debug/Parse-1.9.4-c179d8fd56a0e0f9bad012dee13ebed0f08cd093.jar" />
+    </item>
+    <item
+        jar="/Users/Lindsey/AndroidStudioProjects/subway_alert/app/libs/ParseFacebookUtilsV3-1.9.4.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="9ad88479eadea36956d1e9c67604c68cb1cc222d">
+        <dex dex="/Users/Lindsey/AndroidStudioProjects/subway_alert/app/build/intermediates/pre-dexed/debug/ParseFacebookUtilsV3-1.9.4-34b58ca47be347350c832cd2e31043c220d7ba00.jar" />
+    </item>
+    <item
+        jar="/Users/Lindsey/AndroidStudioProjects/subway_alert/app/libs/bolts-android-1.2.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="6ee2953ccf51ce72b6d548c30c4633b99eb4f9dd">
+        <dex dex="/Users/Lindsey/AndroidStudioProjects/subway_alert/app/build/intermediates/pre-dexed/debug/bolts-android-1.2.0-65ccead8996302bf731204d1c0cc51d117d9b23f.jar" />
+    </item>
+
+</items>
