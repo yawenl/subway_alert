@@ -153,8 +153,8 @@ public class GenerateAlert extends TimerTask{
                 editor.putInt("train_hour", train_hour);
                 editor.putInt("train_minute", tran_minute);
                 editor.commit();
-                String print_minute = "";
-                String print_hour = "";
+                String print_minute = Integer.toString(tran_minute);
+                String print_hour = Integer.toString(train_hour);
                 if (tran_minute < 10) {
                     print_minute = "0"+Integer.toString(tran_minute);
                 }
