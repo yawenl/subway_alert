@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.util.Log;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -204,5 +205,23 @@ public class Utility {
         } else {
             return b + a;
         }
+    }
+
+    /**
+     *
+     * calculate the time into seconds
+     *
+     * @return totalSeconds
+     */
+    public static int getCurrentTime(){
+        Calendar c = Calendar.getInstance();
+
+        int seconds = c.get(Calendar.SECOND);
+        int minutes = c.get(Calendar.MINUTE);
+        int hours = c.get(Calendar.HOUR);
+
+        int totalSeconds = seconds + minutes * 60 + hours * 60 * 60;
+        return totalSeconds;
+
     }
 }

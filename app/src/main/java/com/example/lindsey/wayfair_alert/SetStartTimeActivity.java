@@ -1,22 +1,15 @@
 package com.example.lindsey.wayfair_alert;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
-import android.content.SharedPreferences;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.preference.PreferenceManager;
+import android.support.v7.app.ActionBarActivity;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TimePicker;
-
-import org.json.JSONObject;
-
-import java.net.HttpURLConnection;
-import java.net.URL;
 
 
 public class SetStartTimeActivity extends ActionBarActivity {
@@ -27,8 +20,6 @@ public class SetStartTimeActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_set_start_time);
-
-
     }
 
     @Override
@@ -70,9 +61,31 @@ public class SetStartTimeActivity extends ActionBarActivity {
         editor.putInt("workMinute", workMinute);
         editor.putInt("homeHour", homeHour);
         editor.putInt("homeMinute", homeMinute);
+
+        EditText eHomeToStationEditText = (EditText)this.findViewById(R.id.eHomeToStation);
+        // check content
+        if(TextUtils.isEmpty(eHomeToStationEditText.getText())){
+           eHomeToStationEditText.setError("Estimate Time could not be empty");
+        }
+
+
+        EditText eWorkToStationEditText = (EditText)this.findViewById(R.id.eWorkToStation);
+        if(TextUtils.isEmpty(eWorkToStationEditText.getText())){
+            eWorkToStationEditText.setError("Estimate Time could not be empty");
+        }
+
+
+        int timeEHomeToStation = Integer.parseInt(((EditText)this.findViewById(R.id.eHomeToStation)).getText().toString());
+        editor.putInt("eHomeToStation", timeEHomeToStation);
+
+        int timeEWorkToStation = Integer.parseInt(((EditText)this.findViewById(R.id.eWorkToStation)).getText().toString());
+        editor.putInt("eWorkToStation", timeEWorkToStation);
+
+
         editor.commit();
 
-
+        Intent intent = new Intent(this, SetStopAndDirectionActivity.class);
+        startActivity(intent);
 
         finish();
         return;
