@@ -16,13 +16,6 @@
         <dex dex="D:\subway_alert\app\build\intermediates\pre-dexed\debug\classes-f8e70b6270cb5ca4d14e6ef32b1553ea740f189b.jar" />
     </item>
     <item
-        jar="C:\Users\dameng\.gradle\caches\modules-2\files-2.1\com.mcxiaoke.volley\library\1.0.15\9093a362d18c5f81f58e49d86dece57d9b6e1cb7\library-1.0.15.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="9093a362d18c5f81f58e49d86dece57d9b6e1cb7">
-        <dex dex="D:\subway_alert\app\build\intermediates\pre-dexed\debug\library-1.0.15-c11aae7fa3a3153494b85ddc9c1e7c68387f6585.jar" />
-    </item>
-    <item
         jar="D:\subway_alert\app\libs\Parse-1.9.4.jar"
         jumboMode="false"
         revision="21.1.2"

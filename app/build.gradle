@@ -23,6 +23,4 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:22.1.1'
     compile 'com.parse.bolts:bolts-android:1.2.0'
-    compile 'com.mcxiaoke.volley:library:1.0.15'
-    compile fileTree(dir: 'libs', include: '*.jar')   //Parse API
 }
