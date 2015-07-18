@@ -31,7 +31,16 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:background="@android:color/white"
                 android:text="Train comes in: X mins"
-                android:id="@+id/train_arrive_time_work"
+                android:id="@+id/train_arrive_time_work_1"
+                android:layout_gravity="center_horizontal" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:background="@android:color/white"
+                android:text="Train comes in: X mins"
+                android:id="@+id/train_arrive_time_work_2"
                 android:layout_gravity="center_horizontal" />
 
             <Button
