@@ -39,11 +39,9 @@ public class JSONParser {
 
             DefaultHttpClient httpClient = new DefaultHttpClient();
             HttpGet httpPost = new HttpGet(url);
-
             HttpResponse httpResponse = httpClient.execute(httpPost);
             HttpEntity httpEntity = httpResponse.getEntity();
             is = httpEntity.getContent();
-
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         } catch (ClientProtocolException e) {
