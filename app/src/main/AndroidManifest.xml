@@ -6,23 +6,32 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
+        android:name=".SubwayAlertApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme"
-        android:name=".SubwayAlertApp">
+        android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".SignUpActivity"
             android:label="@string/title_activity_sign_up" >
+            android:name=".APICallActivity"
+            android:label="@string/title_activity_apicall" >
+        </activity>
+        <activity
+            android:name=".DismissNotifier"
+            android:label="@string/dismiss_notifier" >
+        </activity>
+        <activity
+            android:name=".SnoozeNotifier"
+            android:label="@string/snooze_notifier" >
         </activity>
     </application>
 
