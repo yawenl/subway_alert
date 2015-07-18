@@ -106,6 +106,7 @@ public class GenerateAlert extends TimerTask{
             String generate_notification = "";
             int predict_arrival_time = 0;
             SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(main);
+            SharedPreferences.Editor editor = sharedPref.edit();
             try {
 
                 String stop_id = json.getString("stop_id");
@@ -147,17 +148,29 @@ public class GenerateAlert extends TimerTask{
                     }
                 }
 
+                int train_hour = new Date((long) predict_arrival_time * 1000).getHours();
+                int tran_minute = new Date((long)predict_arrival_time * 1000).getMinutes();
+                editor.putInt("train_hour", train_hour);
+                editor.putInt("train_minute", tran_minute);
+                editor.commit();
+                String print_minute = "";
+                String print_hour = "";
+                if (tran_minute < 10) {
+                    print_minute = "0"+Integer.toString(tran_minute);
+                }
+                if (train_hour < 10) {
+                    print_hour = "0"+Integer.toString(train_hour);
+                }
 
                 generate_notification = "Please leave in 3 minutes Train to " + trip_headsign + " will arrive at "
-                        + new Date((long) predict_arrival_time * 1000).getHours() + ":" + new Date((long)predict_arrival_time * 1000).getMinutes();
+                        + print_hour + ":" + print_minute;
                 Log.d(TAG, json.toString());
             } catch (Exception e) {
                 e.printStackTrace();
                 generate_notification = "There is no train available now";
                 return generate_notification;
             }
-
-            SharedPreferences.Editor editor = sharedPref.edit();
+            
             editor.putInt("arrival_time", predict_arrival_time);
             editor.commit();
             return generate_notification;
