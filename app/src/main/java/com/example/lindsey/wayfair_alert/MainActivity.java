@@ -13,50 +13,12 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 
-import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
-
-import java.util.Arrays;
-import java.util.List;
-import android.util.Log;
-import android.widget.Button;
 import android.widget.TextView;
-
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import com.example.lindsey.wayfair_alert.APICallActivity;
-import com.example.lindsey.wayfair_alert.JSONParser;
-
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLConnection;
-import java.sql.Connection;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Timer;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONTokener;
-
-import android.view.View;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -66,19 +28,9 @@ public class MainActivity extends ActionBarActivity {
     //10.0.2.2 is the address used by the Android emulators to refer to the host address
     // change this to the IP of another host if required
     private static String ageURL = "https://raw.githubusercontent.com/dm37537/Career-Matcher/master/App/test.json";
-    private static String getAge = "getAge";
-    private static String jsonResult = "success";
-    String uname;
-    String age_res;
-    TextView Results;
-    JSONObject json;
-
-    // temporary string to show the parsed response
-    private String jsonResponse;
     private static String TAG = MainActivity.class.getSimpleName();
-    private Button btnMakeObjectRequest;
-    private TextView txtResponse;
-
+    protected TextView Results;
+    protected JSONObject json;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +42,10 @@ public class MainActivity extends ActionBarActivity {
         passField.setTypeface(Typeface.DEFAULT);
 
         progressBar = (ProgressBar) findViewById(R.id.spinner);
+
+        jsonParser = new JSONParser();
+        Results = (TextView) findViewById(R.id.txtResponse);
+        new GenerateNotification(ageURL).execute();
     }
 
     /**
@@ -108,10 +64,6 @@ public class MainActivity extends ActionBarActivity {
         //Use AsyncTask to enable built-in Espresso support for testing async operations
         AsyncTask<String, Void, String> loginTask = createLoginAsyncTask();
         loginTask.execute(usernameField.getText().toString(), passField.getText().toString());
-
-        jsonParser = new JSONParser();
-        Results = (TextView) findViewById(R.id.txtResponse);
-        new GenerateNotification(ageURL).execute();
     }
 
     /**
