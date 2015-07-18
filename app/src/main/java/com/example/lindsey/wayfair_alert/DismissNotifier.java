@@ -15,7 +15,7 @@ public class DismissNotifier extends Activity {
         NotificationManager nm = (NotificationManager)
                 getSystemService(NOTIFICATION_SERVICE);
         Intent thisIntent = getIntent();
-        //nm.cancel(thisIntent.getExtras().getInt("notificationID"));
+        nm.cancel(thisIntent.getExtras().getInt("notificationID"));
 
         // Create object of SharedPreferences.
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
