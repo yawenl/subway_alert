@@ -22,7 +22,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Timer;
 
-import enumPackage.DirectionOptions;
 import enumPackage.StationOptions;
 
 public class MainActivity extends ActionBarActivity {
@@ -82,7 +81,7 @@ public class MainActivity extends ActionBarActivity {
         color_map.put(3, "FF5C5C");
         getValues();
         setTrainArriveTime();
-        setWorkEndWorkTime();
+        setEndWorkTime();
         setStationAndDirection();
         setWalkTime();
         Log.d("main:", train_info.notification);
@@ -98,8 +97,8 @@ public class MainActivity extends ActionBarActivity {
         this.person_home_time_min = sharedPref.getInt("homeMinute", 0);
         //this.home_station_walk_time = sharedPref.getInt("home_station_walk_time", 5);
         this.work_station_walk_time = sharedPref.getInt("work_station_walk_time", 5);
-        this.work_station_name = StationOptions.val(sharedPref.getInt("station", 1));
-        this.direction_name = DirectionOptions.val(sharedPref.getInt("direction", 1));
+        this.work_station_name = StationOptions.values()[sharedPref.getInt("station", 0)];
+        this.direction_name = StationOptions.values()[sharedPref.getInt("direction", 0)];
         this.line = color_map.get(sharedPref.getInt("line", 0));
         this.train_arrive_work_station_hour_1 = new Date((long)sharedPref.getInt("next_next_train",0)).getHours();
         this.train_arrive_work_station_min_1 = new Date((long)sharedPref.getInt("next_next_train",0)).getMinutes();
@@ -115,9 +114,9 @@ public class MainActivity extends ActionBarActivity {
         this.train_come_work_text_2.setText("TRAIN COMES IN "+train_arrive_work_station_hour_2 + ":" + ((train_arrive_work_station_min_2 < 10) ? ("0"+train_arrive_work_station_min_2) : train_arrive_work_station_min_2));
     }
 
-    public void setWorkEndWorkTime() {
+    public void setEndWorkTime() {
         this.go_to_home_time_button = (Button) findViewById(R.id.go_to_home_time);
-        this.go_to_home_time_button.setText("" + person_home_time_hour + ":" +
+        this.go_to_home_time_button.setText("OFF WORK TIME: " + person_home_time_hour + ":" +
                 ((person_home_time_min < 10) ? ("0" + person_home_time_min) : person_home_time_min));
     }
 
@@ -129,7 +128,7 @@ public class MainActivity extends ActionBarActivity {
 
     public void setWalkTime() {
         this.time_to_work_station_button = (Button) findViewById(R.id.time_to_work_station);
-        this.time_to_work_station_button.setText("Time needed to get to station: " + this.work_station_walk_time);
+        this.time_to_work_station_button.setText("Time needed to get to station: " + this.work_station_walk_time + "mins");
     }
 
     public void gotoTimeSetting(View view) {
