@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Timer;
@@ -28,8 +29,13 @@ public class MainActivity extends ActionBarActivity {
 
     private int person_home_time_hour = 18;
     private int person_home_time_min = 0;
-    private int train_arrive_work_station_hour = 8;
-    private int train_arrive_work_station_min = 0;
+    private int train_arrive_work_station_hour_1 = 8;
+    private int train_arrive_work_station_min_1 = 0;
+    private int train_arrive_work_station_hour_2 = 8;
+    private int train_arrive_work_station_min_2 = 0;
+
+    private int next_train_arrive_work_station_hour = 8;
+    private int next_train_arrive_work_station_min = 0;
 
     private String work_station_name;
     private String line;
@@ -42,7 +48,8 @@ public class MainActivity extends ActionBarActivity {
     private Button station_name_button;
     private TextView leave_work_text;
     private TextView leave_home_text;
-    private TextView train_come_work_text;
+    private TextView train_come_work_text_1;
+    private TextView train_come_work_text_2;
 
     private Map<Integer, String> color_map = new HashMap<Integer, String>();
 
@@ -94,11 +101,18 @@ public class MainActivity extends ActionBarActivity {
         this.work_station_name = StationOptions.val(sharedPref.getInt("station", 1));
         this.direction_name = DirectionOptions.val(sharedPref.getInt("direction", 1));
         this.line = color_map.get(sharedPref.getInt("line", 0));
+        this.train_arrive_work_station_hour_1 = new Date((long)sharedPref.getInt("next_next_train",0)).getHours();
+        this.train_arrive_work_station_min_1 = new Date((long)sharedPref.getInt("next_next_train",0)).getMinutes();
+        this.train_arrive_work_station_hour_2 = new Date((long)sharedPref.getInt("next_next_train",0)).getHours();
+        this.train_arrive_work_station_min_2 = new Date((long)sharedPref.getInt("next_next_train",0)).getMinutes();
+
     }
 
     public void setTrainArriveTime() {
-        this.train_come_work_text = (TextView)findViewById(R.id.train_arrive_time_work);
-        this.train_come_work_text.setText(""+train_arrive_work_station_hour + ":" + ((train_arrive_work_station_min < 10) ? ("0"+train_arrive_work_station_min) : train_arrive_work_station_min));
+        this.train_come_work_text_1 = (TextView)findViewById(R.id.train_arrive_time_work_1);
+        this.train_come_work_text_1.setText("TRAIN COMES IN "+train_arrive_work_station_hour_1 + ":" + ((train_arrive_work_station_min_1 < 10) ? ("0"+train_arrive_work_station_min_1) : train_arrive_work_station_min_1));
+        this.train_come_work_text_2 = (TextView)findViewById(R.id.train_arrive_time_work_2);
+        this.train_come_work_text_2.setText("TRAIN COMES IN "+train_arrive_work_station_hour_2 + ":" + ((train_arrive_work_station_min_2 < 10) ? ("0"+train_arrive_work_station_min_2) : train_arrive_work_station_min_2));
     }
 
     public void setWorkEndWorkTime() {

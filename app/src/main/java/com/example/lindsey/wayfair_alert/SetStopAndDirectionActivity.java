@@ -4,8 +4,10 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.NumberPicker;
 
 import enumPackage.DirectionOptions;
@@ -24,7 +26,7 @@ public class SetStopAndDirectionActivity extends ActionBarActivity {
 
         stationPicker();
         directionPicker();
-
+        linePicker();
 
     }
 
@@ -67,9 +69,6 @@ public class SetStopAndDirectionActivity extends ActionBarActivity {
         linePick.setMinValue(0);
         linePick.setMaxValue(LineOpitons.values().length - 1);
 
-        for(Enum e : LineOpitons.values()){
-
-        }
         String [] line = new String[LineOpitons.values().length];
         for(int i = 0; i < LineOpitons.values().length; i++){
             line[i] = LineOpitons.values()[i].toString();
@@ -102,23 +101,24 @@ public class SetStopAndDirectionActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void SendStationAndDirection(){
+    public void SendStationAndDirection(View view){
 
         // int value
         NumberPicker linePicker = (NumberPicker) this.findViewById(R.id.linePicker);
         int line = linePicker.getValue();
 
-        NumberPicker stationPicker = (NumberPicker) this.findViewById(R.id.linePicker);
-        int station = stationPicker.getValue();
+        NumberPicker stationPicker = (NumberPicker) this.findViewById(R.id.stationPicker);
+        String station = StationOptions.values()[stationPicker.getValue()].toString();
 
         NumberPicker directionPicker = (NumberPicker) this.findViewById(R.id.directionPicker);
-        int direction = directionPicker.getValue();
+        String direction = DirectionOptions.values()[directionPicker.getValue()].toString();
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt("line", line);
-        editor.putInt("station", station);
-        editor.putInt("direction", direction);
+        editor.putString("station", station);
+        editor.putString("direction", direction);
+
         editor.commit();
 
         finish();

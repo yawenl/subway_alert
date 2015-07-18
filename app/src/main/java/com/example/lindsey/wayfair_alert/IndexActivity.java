@@ -100,7 +100,7 @@ public class IndexActivity extends ActionBarActivity {
     }
 
     public void setTrainArriveTime() {
-        this.train_come_work_text = (TextView)findViewById(R.id.train_arrive_time_work);
+        this.train_come_work_text = (TextView)findViewById(R.id.train_arrive_time_work_1);
         this.train_come_work_text.setText(""+train_arrive_work_station_hour+":"+
                 ((train_arrive_work_station_min < 10) ? ("0"+train_arrive_work_station_min) : train_arrive_work_station_min));
 
