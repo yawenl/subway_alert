@@ -176,11 +176,14 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public NotificationCompat.Builder createNotification(String notification) {
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        int min_to_leave = sharedPref.getInt("next_train", 0);
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.drawable.alert)
                 .setColor(android.graphics.Color.rgb(255,151,81))
                 .setContentTitle("When To Go:")
                 .setContentText(notification)
+                .setNumber(min_to_leave)
                 .setAutoCancel(true)
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(notification));
         //go to activity
@@ -207,7 +210,7 @@ public class MainActivity extends ActionBarActivity {
 
         //add to notification builder
         mBuilder.addAction(R.drawable.no, "dismiss", dismissPIntent);
-        mBuilder.addAction(R.drawable.snooze, "snooze", snoozePIntent);
+        mBuilder.addAction(R.drawable.skip, "skip", snoozePIntent);
 
         NotificationManager mNotifyMgr = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         mNotifyMgr.notify(mNotificationId, mBuilder.build());
