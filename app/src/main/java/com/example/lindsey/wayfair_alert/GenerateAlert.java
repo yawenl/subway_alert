@@ -47,7 +47,7 @@ public class GenerateAlert extends TimerTask{
 
             int hour = sharedPref.getInt("workHour", 18);
             int min = sharedPref.getInt("workMinute", 0);
-            int walk_time = sharedPref.getInt("work_station_walk_time", 7);
+            int walk_time = sharedPref.getInt("work_station_walk_time", 5);
             int line = sharedPref.getInt("line", 0);
             int direction = sharedPref.getInt("direction", 0);
             String line_name = LineOptions.values()[line].toString();
@@ -87,7 +87,7 @@ public class GenerateAlert extends TimerTask{
             int alert_start_time = (int)(base_time/1000) + (hour * 3600 + min * 60 - 180);
             int get_to_station = (int)(current_time/1000) + walk_time * 60;
             int upper_bound = arrival_time;
-            int lower_bound = arrival_time - 240;
+            int lower_bound = arrival_time - 120;
             current_time = (int)(current_time/1000);
 
 
@@ -108,6 +108,12 @@ public class GenerateAlert extends TimerTask{
                 Vibrator v = (Vibrator) main.getSystemService(Context.VIBRATOR_SERVICE);
                 v.vibrate(500);
                 main.createNotification(this.train_info.notification);
+            } else if (stop.equalsIgnoreCase("skip")) {
+                Thread.sleep(20000);
+                Log.d("skip", "skip");
+                editor = sharedPref.edit();
+                editor.putString("isDismiss", "not dismissed");
+                editor.commit();
             }
 
 
@@ -141,14 +147,15 @@ public class GenerateAlert extends TimerTask{
                 for (int i = 0; i < modes.length(); ++i) {
                     JSONObject mode = (JSONObject) modes.get(i);
                     int type = mode.getInt("route_type");
-                    //type: subway
+                    //type: subway for orange, bus for green
                     if (type == 1 || type == 3){
                         JSONArray routes = mode.getJSONArray("route");
                         for (int j = 0; j < routes.length(); ++j) {
                             JSONObject route = (JSONObject) routes.get(j);
                             String route_id = route.getString("route_id");
-                            //route_id compares line name(orange, green)
-                            if (route_id.equalsIgnoreCase(sharedPref.getString("line_name", "orange"))) {
+                            //route_id compares line name(orange, green) bus(39)
+                            Log.d("route id", route_id);
+                            if (route_id.equalsIgnoreCase(sharedPref.getString("line_name", "orange")) || route_id.equalsIgnoreCase("39")) {
                                 JSONArray directions = route.getJSONArray("direction");
                                 for (int k = 0; k < directions.length(); ++k) {
                                     JSONObject direction = (JSONObject) directions.get(k);
@@ -175,7 +182,7 @@ public class GenerateAlert extends TimerTask{
                                             int current_time = (int)(System.currentTimeMillis()/1000);
                                             int walk_time = sharedPref.getInt("walk_time", 7) * 60;
                                             Log.d("in loop walk_time time", ""+walk_time);
-                                            if (current_time + walk_time + 60 < trip.getInt("pre_dt")) {
+                                            if (current_time + walk_time + 120 < trip.getInt("pre_dt")) {
                                                 predict_arrival_time = trip.getInt("pre_dt");
                                                 trip_headsign = trip.getString("trip_headsign");
                                                 Log.d("in loop arrving time", ""+predict_arrival_time);
@@ -203,7 +210,7 @@ public class GenerateAlert extends TimerTask{
                     print_hour = "0"+Integer.toString(train_hour);
                 }
 
-                generate_notification = "Please leave in 3 minutes. Train to " + trip_headsign + " will arrive at "
+                generate_notification = "Hurry up. Train to " + trip_headsign + " will arrive at "
                         + print_hour + ":" + print_minute;
             } catch (Exception e) {
                 e.printStackTrace();
