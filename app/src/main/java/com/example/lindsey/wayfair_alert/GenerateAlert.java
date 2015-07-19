@@ -141,14 +141,15 @@ public class GenerateAlert extends TimerTask{
                 for (int i = 0; i < modes.length(); ++i) {
                     JSONObject mode = (JSONObject) modes.get(i);
                     int type = mode.getInt("route_type");
-                    //type: subway
+                    //type: subway for orange, bus for green
                     if (type == 1 || type == 3){
                         JSONArray routes = mode.getJSONArray("route");
                         for (int j = 0; j < routes.length(); ++j) {
                             JSONObject route = (JSONObject) routes.get(j);
                             String route_id = route.getString("route_id");
-                            //route_id compares line name(orange, green)
-                            if (route_id.equalsIgnoreCase(sharedPref.getString("line_name", "orange"))) {
+                            //route_id compares line name(orange, green) bus(39)
+                            Log.d("route id", route_id);
+                            if (route_id.equalsIgnoreCase(sharedPref.getString("line_name", "orange")) || route_id.equalsIgnoreCase("39")) {
                                 JSONArray directions = route.getJSONArray("direction");
                                 for (int k = 0; k < directions.length(); ++k) {
                                     JSONObject direction = (JSONObject) directions.get(k);
