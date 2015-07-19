@@ -22,22 +22,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SignUpActivity"
-            android:label="@string/title_activity_sign_up" >
-            android:name=".APICallActivity"
-            android:label="@string/title_activity_apicall" >
-        </activity>
-        <activity
             android:name=".DismissNotifier"
             android:label="@string/dismiss_notifier" >
         </activity>
         <activity
             android:name=".SnoozeNotifier"
             android:label="@string/snooze_notifier" >
-        </activity>
-        <activity
-            android:name=".IndexActivity"
-            android:label="@string/title_activity_index" >
         </activity>
         <activity
             android:name=".SetStartTimeActivity"

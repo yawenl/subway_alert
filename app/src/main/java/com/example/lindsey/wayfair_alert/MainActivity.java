@@ -29,31 +29,25 @@ public class MainActivity extends ActionBarActivity {
 
     private int person_home_time_hour = 18;
     private int person_home_time_min = 0;
-    private int train_arrive_work_station_hour_1 = 8;
-    private int train_arrive_work_station_min_1 = 0;
-    private int train_arrive_work_station_hour_2 = 8;
-    private int train_arrive_work_station_min_2 = 0;
 
-    private int next_train_arrive_work_station_hour = 8;
-    private int next_train_arrive_work_station_min = 0;
+    private String minutes_till_next_train;
+    private String minutes_till_next_next_train;
 
     private String work_station_name;
     private String line;
     private String direction_name;
     private int work_station_walk_time = 0;
 
-    private TextView time_to_work_station_text;
-    private Button go_to_home_time_button;
-    private TextView station_name_text;
-    private TextView direction_text;
-    private TextView leave_work_text;
-    private TextView leave_home_text;
-    private TextView train_come_work_text_1;
-    private TextView train_come_work_text_2;
+    private TextView walking_time;
+    //private Button time_to_home_station_button;
+    private TextView off_work_time;
+    private TextView work_station_name_view;
+    private TextView work_station_direction;
+    private TextView next_train_work;
+    private TextView next_next_train_work;
 
     private Map<Integer, String> color_map = new HashMap<Integer, String>();
 
-    private ProgressBar progressBar;
     private TrainInfo train_info;
 
     //10.0.2.2 is the address used by the Android emulators to refer to the host address
@@ -63,8 +57,6 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_index);
-
-        progressBar = (ProgressBar) findViewById(R.id.spinner);
 
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = sharedPref.edit();
@@ -86,7 +78,7 @@ public class MainActivity extends ActionBarActivity {
         setStationAndDirection();
         setWalkTime();
         Log.d("main:", train_info.notification);
-       // createNotification(train_info.notification);
+        // createNotification(train_info.notification);
     }
 
     public void getValues() {
@@ -100,42 +92,45 @@ public class MainActivity extends ActionBarActivity {
         this.work_station_walk_time = sharedPref.getInt("work_station_walk_time", 5);
         this.work_station_name = StationOptions.values()[sharedPref.getInt("station", 0)].toString();
 
-        Log.d("aaaaaaa", StationOptions.values()[sharedPref.getInt("station", 0)].toString());
         this.direction_name = DirectionOptions.values()[sharedPref.getInt("direction", 0)].toString();
         this.line = color_map.get(sharedPref.getInt("line", 0));
-        Log.d("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",this.line);
-        this.train_arrive_work_station_hour_1 = new Date((long)sharedPref.getInt("next_train",0)*1000).getHours();
-        this.train_arrive_work_station_min_1 = new Date((long)sharedPref.getInt("next_train",0)*1000).getMinutes();
-        this.train_arrive_work_station_hour_2 = new Date((long)sharedPref.getInt("next_next_train",0)*1000).getHours();
-        this.train_arrive_work_station_min_2 = new Date((long)sharedPref.getInt("next_next_train",0)*1000).getMinutes();
+        //calculate duration in minutes between now and next train
+        Date next_train_in_date = new Date((long)sharedPref.getInt("next_train",0)*1000);
+        Date now_in_date = new Date();
+        long diff = next_train_in_date.getTime() - now_in_date.getTime();
+        this.minutes_till_next_train = Integer.toString((int) diff / (60 * 1000) % 60);
+        this.minutes_till_next_train += "min";
 
+        Date next_next_train_in_date = new Date((long)sharedPref.getInt("next_next_train",0)*1000);
+        long diff2 = next_next_train_in_date.getTime() - now_in_date.getTime();
+        this.minutes_till_next_next_train = Integer.toString((int)diff2 / (60 * 1000) % 60);
+        this.minutes_till_next_next_train += "min";
     }
 
     public void setTrainArriveTime() {
-        this.train_come_work_text_1 = (TextView)findViewById(R.id.train_arrive_time_work_1);
-        this.train_come_work_text_1.setText("TRAIN COMES IN "+train_arrive_work_station_hour_1 + ":" + ((train_arrive_work_station_min_1 < 10) ? ("0"+train_arrive_work_station_min_1) : train_arrive_work_station_min_1));
-        this.train_come_work_text_2 = (TextView)findViewById(R.id.train_arrive_time_work_2);
-        this.train_come_work_text_2.setText("TRAIN COMES IN "+train_arrive_work_station_hour_2 + ":" + ((train_arrive_work_station_min_2 < 10) ? ("0"+train_arrive_work_station_min_2) : train_arrive_work_station_min_2));
+        this.next_train_work = (TextView)findViewById(R.id.next_train_work);
+        this.next_train_work.setText(minutes_till_next_train);
+        this.next_next_train_work = (TextView)findViewById(R.id.next_next_train_work);
+        this.next_next_train_work.setText(minutes_till_next_next_train);
     }
 
     public void setEndWorkTime() {
-        this.go_to_home_time_button = (Button) findViewById(R.id.go_to_home_time);
-        this.go_to_home_time_button.setText("OFF WORK TIME: " + person_home_time_hour + ":" +
+        this.off_work_time = (TextView) findViewById(R.id.off_work_time);
+        this.off_work_time.setText(person_home_time_hour + ":" +
                 ((person_home_time_min < 10) ? ("0" + person_home_time_min) : person_home_time_min));
     }
 
     public void setStationAndDirection() {
-        this.station_name_text = (TextView)findViewById(R.id.work_station_name);
-        this.station_name_text.setText(this.work_station_name);
+        this.work_station_name_view = (TextView)findViewById(R.id.work_station_name);
+        this.work_station_name_view.setText(this.work_station_name);
 
-        this.direction_text = (TextView)findViewById(R.id.work_station_direction);
-        this.direction_text.setText(this.direction_name);
-        //this.station_name_button.setTextColor(Integer.parseInt(this.line,16));
+        this.work_station_direction = (TextView)findViewById(R.id.work_station_direction);
+        this.work_station_direction.setText(this.direction_name);
     }
 
     public void setWalkTime() {
-        this.time_to_work_station_text = (TextView) findViewById(R.id.time_to_work_station);
-        this.time_to_work_station_text.setText("Time needed to get to station: " + this.work_station_walk_time + " mins");
+        this.walking_time = (TextView) findViewById(R.id.walking_time);
+        this.walking_time.setText(this.work_station_walk_time + "min");
     }
 
     public void gotoTimeSetting(View view) {

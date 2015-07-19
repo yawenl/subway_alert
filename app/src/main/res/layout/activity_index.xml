@@ -1,82 +1,152 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent" android:layout_height="fill_parent"
-    android:id="@+id/layoutContainer" android:orientation="horizontal"
-    android:background="@drawable/background_w_logo">
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:id="@+id/layoutContainer"
+    android:orientation="horizontal"
+    android:background="@drawable/main_page"
+    android:paddingLeft="15dp">
 
     <RelativeLayout
-        android:layout_width="0dip"
-        android:layout_height="fill_parent"
-        android:layout_weight="0.7">
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
 
-        <!-- This is the part that's 70% of the total width. I'm inserting a LinearLayout and buttons.-->
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingBottom="12dp">
 
-            <TextView
+            <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="Work Station Name+inbound/outbound"
-                android:background="@android:color/white"
-                android:id="@+id/work_station_name"
-                android:layout_gravity="center_horizontal"
-                android:onClick="gotoStationSetting"
-                android:layout_marginBottom="5dp" />
+                android:orientation="horizontal"
+                android:layout_marginBottom="70dp">
 
-            <TextView
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="Back Bay"
+                        android:textColor="#ffffff"
+                        android:textSize="32dp"
+                        android:typeface="sans"
+                        android:id="@+id/work_station_name"
+                        android:layout_gravity="center_horizontal" />
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="Outbound"
+                        android:textColor="#a0a0a0"
+                        android:textSize="15dp"
+                        android:typeface="sans"
+                        android:id="@+id/work_station_direction"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginBottom="5dp" />
+
+                </LinearLayout>
+
+                <Button
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:id="@+id/work_station_btn"
+                    android:onClick="gotoStationSetting" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="90dp"
+                android:layout_marginRight="13dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="5min"
+                    android:textColor="#ffffff"
+                    android:textSize="35dp"
+                    android:layout_marginRight="12dp"
+                    android:id="@+id/next_train_work"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="15min"
+                    android:textColor="#ffffff"
+                    android:textSize="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:id="@+id/next_next_train_work"/>
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="Work Station Name+inbound/outbound"
-                android:background="@android:color/white"
-                android:id="@+id/work_station_direction"
-                android:layout_gravity="center_horizontal"
-                android:onClick="gotoStationSetting"
-                android:layout_marginBottom="5dp" />
+                android:orientation="horizontal"
+                android:paddingLeft="135dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="15dp">
 
-            <TextView
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="8min"
+                    android:textColor="#ffffff"
+                    android:textSize="20dp"
+                    android:typeface="sans"
+                    android:id="@+id/walking_time" />
+
+                <Button
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:id="@+id/walking_time_btn"
+                    android:onClick="gotoTimeSetting" />
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:background="@android:color/white"
-                android:text="Train comes in: X mins"
-                android:id="@+id/train_arrive_time_work_1"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="5dp" />
+                android:orientation="horizontal"
+                android:paddingLeft="135dp"
+                android:layout_marginBottom="10dp">
 
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:background="@android:color/white"
-                android:text="Train comes in: X mins"
-                android:id="@+id/train_arrive_time_work_2"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="5dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="5min"
+                    android:textColor="#ffffff"
+                    android:textSize="20dp"
+                    android:typeface="sans"
+                    android:id="@+id/off_work_time" />
 
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:color/white"
-                android:text="Time from your location to the work station"
-                android:id="@+id/time_to_work_station"
-                android:layout_gravity="center_horizontal"
-                android:onClick="gotoTimeSetting"
-                android:layout_marginBottom="5dp" />
+                <Button
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text=">"
+                    android:background="@android:color/transparent"
+                    android:id="@+id/off_work_time_btn"
+                    android:onClick="gotoTimeSetting" />
 
-            <Button
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:color/white"
-                android:text="Go To Home Time"
-                android:id="@+id/go_to_home_time"
-                android:layout_gravity="center_horizontal"
-                android:onClick="gotoTimeSetting" />
+            </LinearLayout>
 
         </LinearLayout>
-        <!-- 70% Width End-->
 
     </RelativeLayout>
 
