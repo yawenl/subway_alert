@@ -104,8 +104,8 @@ public class MainActivity extends ActionBarActivity {
         this.direction_name = DirectionOptions.values()[sharedPref.getInt("direction", 0)].toString();
         this.line = color_map.get(sharedPref.getInt("line", 0));
         Log.d("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",this.line);
-        this.train_arrive_work_station_hour_1 = new Date((long)sharedPref.getInt("next_next_train",0)*1000).getHours();
-        this.train_arrive_work_station_min_1 = new Date((long)sharedPref.getInt("next_next_train",0)*1000).getMinutes();
+        this.train_arrive_work_station_hour_1 = new Date((long)sharedPref.getInt("next_train",0)*1000).getHours();
+        this.train_arrive_work_station_min_1 = new Date((long)sharedPref.getInt("next_train",0)*1000).getMinutes();
         this.train_arrive_work_station_hour_2 = new Date((long)sharedPref.getInt("next_next_train",0)*1000).getHours();
         this.train_arrive_work_station_min_2 = new Date((long)sharedPref.getInt("next_next_train",0)*1000).getMinutes();
 
