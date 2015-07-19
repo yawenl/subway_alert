@@ -16,13 +16,12 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:orientation="vertical"
-            android:paddingBottom="12dp">
+            android:paddingTop="80dp">
 
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="70dp">
+                android:orientation="horizontal">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -68,7 +67,8 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="90dp"
+                android:layout_marginBottom="80dp"
+                android:layout_marginTop="50dp"
                 android:layout_marginRight="13dp">
 
                 <TextView
@@ -96,9 +96,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingLeft="135dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="15dp">
+                android:paddingLeft="135dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -139,12 +137,21 @@
                 <Button
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:text=">"
+                    android:text=""
                     android:background="@android:color/transparent"
                     android:id="@+id/off_work_time_btn"
                     android:onClick="gotoTimeSetting" />
 
             </LinearLayout>
+
+            <Button
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/clear"
+                    android:background="@android:color/transparent"
+                    android:id="@+id/clear_cache_btn"
+                    android:layout_marginTop="30dp"
+                    android:onClick="clearEditor" />
 
         </LinearLayout>
 
