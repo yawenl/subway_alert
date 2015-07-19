@@ -155,7 +155,7 @@ public class GenerateAlert extends TimerTask{
                             String route_id = route.getString("route_id");
                             //route_id compares line name(orange, green) bus(39)
                             Log.d("route id", route_id);
-                            if (route_id.equalsIgnoreCase(sharedPref.getString("line_name", "orange")) || route_id.equalsIgnoreCase("39")) {
+                            if (route_id.equalsIgnoreCase(sharedPref.getString("line_name", "orange")) || (route_id.equalsIgnoreCase("39") && sharedPref.getString("line_name", "orange").equalsIgnoreCase("green"))) {
                                 JSONArray directions = route.getJSONArray("direction");
                                 for (int k = 0; k < directions.length(); ++k) {
                                     JSONObject direction = (JSONObject) directions.get(k);
@@ -175,14 +175,14 @@ public class GenerateAlert extends TimerTask{
                                         }
                                         editor.commit();
                                         Log.d("next", "" + sharedPref.getInt("next_train", 0));
-                                        Log.d("next next", ""+sharedPref.getInt("next_next_train", 0));
+                                        Log.d("next next", "" + sharedPref.getInt("next_next_train", 0));
 
                                         for (int m = 0; m < trips.length(); ++m) {
                                             JSONObject trip = (JSONObject) trips.get(m);
                                             int current_time = (int)(System.currentTimeMillis()/1000);
-                                            int walk_time = sharedPref.getInt("walk_time", 7) * 60;
+                                            int walk_time = sharedPref.getInt("work_station_walk_time", 5) * 60;
                                             Log.d("in loop walk_time time", ""+walk_time);
-                                            if (current_time + walk_time + 120 < trip.getInt("pre_dt")) {
+                                            if (current_time + walk_time < trip.getInt("pre_dt")) {
                                                 predict_arrival_time = trip.getInt("pre_dt");
                                                 trip_headsign = trip.getString("trip_headsign");
                                                 Log.d("in loop arrving time", ""+predict_arrival_time);
