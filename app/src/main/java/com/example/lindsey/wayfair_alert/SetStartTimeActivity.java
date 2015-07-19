@@ -79,7 +79,8 @@ public class SetStartTimeActivity extends ActionBarActivity {
         // estimate time from work to station
         editor.putInt("eWorkToStation", eWorkToStation);
 
-
+        Intent intent = new Intent(this, SetStopAndDirectionActivity.class);
+        startActivity(intent);
 
         editor.commit();
 
