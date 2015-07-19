@@ -186,11 +186,9 @@ public class MainActivity extends ActionBarActivity {
     public void setStationAndDirection() {
         this.work_station_name_view = (TextView)findViewById(R.id.work_station_name);
         this.work_station_name_view.setText(this.work_station_name);
-        this.work_station_name_view.setTextColor(Color.parseColor(line));
 
         this.work_station_direction = (TextView)findViewById(R.id.work_station_direction);
         this.work_station_direction.setText(this.direction_name);
-        this.work_station_direction.setTextColor(Color.parseColor(line));
     }
 
     public void setWalkTime() {
