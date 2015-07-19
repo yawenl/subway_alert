@@ -18,7 +18,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -247,7 +246,6 @@ public class MainActivity extends ActionBarActivity {
         return mBuilder;
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -270,4 +268,9 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void sendMessage(){
+        Intent intent = new Intent(this, SetStartTimeActivity.class);
+        startActivity(intent);
+
+    }
 }
