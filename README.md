@@ -1,4 +1,6 @@
 # subway_alert
+Demo: http://youtu.be/WzC82UHJ9f8
+
 Author: Rick Liao, Lindsey Liu, Yawen Luo, Da Meng, Lubron Zhan
 
 Purpose: To display when the next train will arrive and to alert people when to leave office to catch trains on time.
