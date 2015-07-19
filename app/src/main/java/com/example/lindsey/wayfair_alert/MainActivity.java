@@ -6,6 +6,8 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
@@ -78,10 +80,10 @@ public class MainActivity extends ActionBarActivity {
 
         startTimer();
 
-        color_map.put(0, "FFAD5C");
-        color_map.put(1, "94FF94");
-        color_map.put(2, "A9E9FF");
-        color_map.put(3, "FF5C5C");
+        color_map.put(0, "#FFAD5C");
+        color_map.put(1, "#94FF94");
+        color_map.put(2, "#A9E9FF");
+        color_map.put(3, "#FF5C5C");
 
         getValues();
         setTrainArriveTime();
@@ -154,19 +156,13 @@ public class MainActivity extends ActionBarActivity {
         this.train_arrive_work_station_min_2 = new Date((long)sharedPref.getInt("next_next_train",0)*1000).getMinutes();
 
         this.direction_name = DirectionOptions.val(sharedPref.getInt("direction", 0));
-        this.line = color_map.get(sharedPref.getInt("line", 0));
+
         //calculate duration in minutes between now and next train
         Date next_train_in_date = new Date((long)sharedPref.getInt("next_train",0)*1000);
         Date now_in_date = new Date();
         long diff = next_train_in_date.getTime() - now_in_date.getTime();
         this.minutes_till_next_train = Integer.toString((int) diff / (60 * 1000) % 60);
         this.minutes_till_next_train += "min";
-
-        Log.d("asdfas nexttrain", next_train_in_date.getTime() + "");
-        Log.d("asdfas .getTime()", now_in_date.getTime() + "");
-        Date day = new Date(1437318660);
-        Log.d("asdfas day", day.getTime() + "");
-
 
         Date next_next_train_in_date = new Date((long)sharedPref.getInt("next_next_train",0)*1000);
         long diff2 = next_next_train_in_date.getTime() - now_in_date.getTime();
@@ -190,9 +186,11 @@ public class MainActivity extends ActionBarActivity {
     public void setStationAndDirection() {
         this.work_station_name_view = (TextView)findViewById(R.id.work_station_name);
         this.work_station_name_view.setText(this.work_station_name);
+        this.work_station_name_view.setTextColor(Color.parseColor(line));
 
         this.work_station_direction = (TextView)findViewById(R.id.work_station_direction);
         this.work_station_direction.setText(this.direction_name);
+        this.work_station_direction.setTextColor(Color.parseColor(line));
     }
 
     public void setWalkTime() {
