@@ -13,33 +13,41 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal">
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal">
 
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="Estimate Time To Station"
-                        android:id="@+id/ehtwText"
-                        android:layout_marginBottom="30dp"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginTop="50dp"
-                    android:layout_gravity="center" />
 
-                <EditText
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:inputType="number"
-                        android:ems="10"
-                        android:id="@+id/eWorkToStation"
-                        android:layout_marginBottom="30dp"
-                        android:width="30dp"
-                        android:text="0"
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Estimate Time To Station"
+                    android:id="@+id/ehtwText"
+                    android:layout_marginBottom="30dp"
+                    android:layout_marginLeft="5dp"
                     android:layout_marginTop="50dp"
-                    android:layout_gravity="center" />
+                android:layout_gravity="center" />
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="-30dp">
+                <NumberPicker
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/eWorkToStation"
+                    android:layout_marginTop="-30dp"
+                    android:paddingTop="3dp"
+                    android:layout_gravity="center"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Minute"
+                    android:id="@+id/eWTS"
+                    android:layout_marginBottom="30dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="20dp"
+
+                    android:layout_gravity="center_vertical"/>
             </TableRow>
 
 
