@@ -99,7 +99,7 @@ public class GenerateAlert extends TimerTask{
 
 
             if (stop.equalsIgnoreCase("dismissed")) {
-                Thread.sleep(20000);
+                Thread.sleep(43200000);
                 editor = sharedPref.edit();
                 editor.putString("isDismiss", "not dismissed");
                 editor.commit();
@@ -109,7 +109,7 @@ public class GenerateAlert extends TimerTask{
                 v.vibrate(500);
                 main.createNotification(this.train_info.notification);
             } else if (stop.equalsIgnoreCase("skip")) {
-                Thread.sleep(20000);
+                Thread.sleep(140000);
                 Log.d("skip", "skip");
                 editor = sharedPref.edit();
                 editor.putString("isDismiss", "not dismissed");
