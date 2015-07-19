@@ -2,26 +2,28 @@ package com.example.lindsey.wayfair_alert;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
-import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
+import android.widget.NumberPicker;
 import android.widget.TimePicker;
 
 
 
 public class SetStartTimeActivity extends ActionBarActivity {
 
-
+    Resources system;
+    private TimePicker workPicker;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_set_start_time);
+        workToStation();
     }
 
     @Override
@@ -46,12 +48,23 @@ public class SetStartTimeActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private void workToStation(){
+        NumberPicker numberPick = (NumberPicker) this.findViewById(R.id.eWorkToStation);
+        numberPick.setMinValue(0);
+        numberPick.setMaxValue(60);
+
+        numberPick.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
+    }
+
     public void SendTime(View view){
         // hour 0 ~ 24  minute: 0 ~60
         // get the go to work time
-        TimePicker workPicker = (TimePicker) this.findViewById(R.id.startTimePicker);
+        this.workPicker = (TimePicker) this.findViewById(R.id.startTimePicker);
         int workHour = workPicker.getCurrentHour();
         int workMinute = workPicker.getCurrentMinute();
+
+        NumberPicker numberPicker = (NumberPicker) this.findViewById(R.id.eWorkToStation);
+        int eWorkToStation = numberPicker.getValue();
         // get the back home time
         /*TimePicker homePicker = (TimePicker) this.findViewById(R.id.endTimePicker);
         int homeHour = homePicker.getCurrentHour();
@@ -63,16 +76,10 @@ public class SetStartTimeActivity extends ActionBarActivity {
         editor.putInt("workMinute", workMinute);
         /*editor.putInt("homeHour", homeHour);
         editor.putInt("homeMinute", homeMinute);*/
+        // estimate time from work to station
+        editor.putInt("eWorkToStation", eWorkToStation);
 
 
-        EditText eWorkToStationEditText = (EditText)this.findViewById(R.id.eWorkToStation);
-        if(TextUtils.isEmpty(eWorkToStationEditText.getText())){
-            eWorkToStationEditText.setError("Estimate Time could not be empty");
-        }
-
-
-        int timeEWorkToStation = Integer.parseInt(((EditText)this.findViewById(R.id.eWorkToStation)).getText().toString());
-        editor.putInt("eWorkToStation", timeEWorkToStation);
 
         editor.commit();
 
@@ -82,4 +89,5 @@ public class SetStartTimeActivity extends ActionBarActivity {
         finish();
         return;
     }
+
 }
