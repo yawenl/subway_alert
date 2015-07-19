@@ -10,7 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.NumberPicker;
 
-import com.example.lindsey.wayfair_alert.R;
+import  com.android.whentogo.R;
 
 import enumPackage.DirectionOptions;
 import enumPackage.LineOptions;

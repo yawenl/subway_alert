@@ -12,7 +12,7 @@ import android.view.View;
 import android.widget.NumberPicker;
 import android.widget.TimePicker;
 
-import com.example.lindsey.wayfair_alert.R;
+import  com.android.whentogo.R;
 
 
 public class SetStartTimeActivity extends ActionBarActivity {

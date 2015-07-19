@@ -16,7 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import com.example.lindsey.wayfair_alert.R;
+import com.android.whentogo.R;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -89,12 +89,6 @@ public class MainActivity extends ActionBarActivity {
         setStationAndDirection();
         setWalkTime();
         // createNotification(train_info.notification);
-    }
-
-    public void clearEditor(View view) {
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.clear();
     }
 
     public void startTimer() {
