@@ -1,119 +1,90 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="3dp"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.example.lindsey.wayfair_alert.SetStartTimeActivity"
-    android:fillViewport="false"
-    android:id="@+id/setTime">
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+        <LinearLayout
+            android:layout_width="362dp"
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
 
 
-    <TableLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:stretchColumns="1"
-        >
-        <!-- everything you already have -->
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="Estimate Time To Station"
+                        android:id="@+id/ehtwText"
+                        android:layout_marginBottom="30dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="50dp"
+                    android:layout_gravity="center" />
+
+                <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:ems="10"
+                        android:id="@+id/eWorkToStation"
+                        android:layout_marginBottom="30dp"
+                        android:width="30dp"
+                        android:text="0"
+                    android:layout_marginTop="50dp"
+                    android:layout_gravity="center" />
+            </TableRow>
 
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Estimate Time Home To Station"
-            android:id="@+id/esstext"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="3dp"
-            android:layout_marginLeft="5dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Go To Work Time"
+                android:id="@+id/startText"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="3dp"
+                android:layout_marginLeft="5dp"
+                android:paddingBottom="20dp"
+                android:layout_gravity="center_horizontal" />
 
+            <TimePicker
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/startTimePicker"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="-30dp"
+                android:layout_marginBottom="30dp"
+                android:timePickerMode="spinner" />
 
+            <Button
+                android:layout_width="385dp"
+                android:layout_height="81dp"
+                android:text="Confirm"
+                android:id="@+id/button"
+                android:textSize="20dp"
+                android:layout_marginBottom="0dp"
+                android:paddingTop="80dp"
+                android:maxWidth="140dp"
+                android:layout_marginLeft="0dp"
+                android:layout_marginRight="0dp"
+                android:padding="3dip"
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:ems="10"
-            android:id="@+id/eHomeToStation"
-            android:width="30dp"
-            android:text="0"
-            android:layout_column="10" />
+                android:clickable="true"
+                android:onClick="SendTime"
+                android:nestedScrollingEnabled="false"
+                android:layout_marginTop="0dp"
+                android:layout_margin="0dp"
+                android:layout_gravity="bottom|center_vertical"
+                android:background="@drawable/bar"
+                android:textColor="@android:color/white" />
 
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Estimate Work To Station"
-            android:id="@+id/ehtwText"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="3dp"
-            android:layout_marginLeft="5dp" />
-
-
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:ems="10"
-            android:id="@+id/eWorkToStation"
-            android:width="30dp"
-            android:text="0"
-            android:layout_column="10" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Go To Work Time"
-            android:id="@+id/startText"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="3dp"
-            android:layout_marginLeft="5dp" />
-
-        <TimePicker
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/startTimePicker"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="-30dp"
-            android:timePickerMode="spinner" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Go Home Time"
-            android:id="@+id/textView"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="0dp"
-            android:layout_marginLeft="5dp" />
-
-        <TimePicker
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/endTimePicker"
-            android:layout_gravity="center_horizontal"
-            android:timePickerMode="spinner"
-            android:layout_marginTop="-30dp"
-            android:paddingTop="3dp" />
-
-        <Button
-            android:layout_width="191dp"
-            android:layout_height="wrap_content"
-            android:text="Confirm"
-            android:id="@+id/button"
-            android:layout_gravity="center_horizontal|bottom"
-            android:textSize="20dp"
-            android:layout_marginBottom="5dp"
-            android:paddingTop="3dp"
-            android:maxWidth="140dp"
-            android:layout_marginLeft="80dp"
-            android:layout_marginRight="80dp"
-            android:padding="3dip"
-
-            android:clickable="true"
-            android:onClick="SendTime"
-            android:nestedScrollingEnabled="false" />
-    </TableLayout>
-</ScrollView>
+            </LinearLayout>
+</LinearLayout>

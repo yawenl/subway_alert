@@ -202,7 +202,7 @@ public class GenerateAlert extends TimerTask{
                     print_hour = "0"+Integer.toString(train_hour);
                 }
 
-                generate_notification = "Please leave in 3 minutes Train to " + trip_headsign + " will arrive at "
+                generate_notification = "Please leave in 3 minutes. Train to " + trip_headsign + " will arrive at "
                         + print_hour + ":" + print_minute;
             } catch (Exception e) {
                 e.printStackTrace();

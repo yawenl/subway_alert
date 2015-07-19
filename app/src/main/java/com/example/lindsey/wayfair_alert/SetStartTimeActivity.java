@@ -53,22 +53,16 @@ public class SetStartTimeActivity extends ActionBarActivity {
         int workHour = workPicker.getCurrentHour();
         int workMinute = workPicker.getCurrentMinute();
         // get the back home time
-        TimePicker homePicker = (TimePicker) this.findViewById(R.id.endTimePicker);
+        /*TimePicker homePicker = (TimePicker) this.findViewById(R.id.endTimePicker);
         int homeHour = homePicker.getCurrentHour();
-        int homeMinute = homePicker.getCurrentMinute();
+        int homeMinute = homePicker.getCurrentMinute();*/
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt("workHour", workHour);
         editor.putInt("workMinute", workMinute);
-        editor.putInt("homeHour", homeHour);
-        editor.putInt("homeMinute", homeMinute);
-
-        EditText eHomeToStationEditText = (EditText)this.findViewById(R.id.eHomeToStation);
-        // check content
-        if(TextUtils.isEmpty(eHomeToStationEditText.getText())){
-           eHomeToStationEditText.setError("Estimate Time could not be empty");
-        }
+        /*editor.putInt("homeHour", homeHour);
+        editor.putInt("homeMinute", homeMinute);*/
 
 
         EditText eWorkToStationEditText = (EditText)this.findViewById(R.id.eWorkToStation);
@@ -76,9 +70,6 @@ public class SetStartTimeActivity extends ActionBarActivity {
             eWorkToStationEditText.setError("Estimate Time could not be empty");
         }
 
-
-        int timeEHomeToStation = Integer.parseInt(((EditText)this.findViewById(R.id.eHomeToStation)).getText().toString());
-        editor.putInt("eHomeToStation", timeEHomeToStation);
 
         int timeEWorkToStation = Integer.parseInt(((EditText)this.findViewById(R.id.eWorkToStation)).getText().toString());
         editor.putInt("eWorkToStation", timeEWorkToStation);
