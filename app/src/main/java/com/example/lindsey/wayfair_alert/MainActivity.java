@@ -91,6 +91,7 @@ public class MainActivity extends ActionBarActivity {
         // createNotification(train_info.notification);
     }
 
+
     public void startTimer() {
         //set a new Timer
         timer = new Timer();
@@ -123,6 +124,16 @@ public class MainActivity extends ActionBarActivity {
         };
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getValues();
+        setTrainArriveTime();
+        setEndWorkTime();
+        setStationAndDirection();
+        setWalkTime();
+    }
+
     public void getValues() {
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         //now get Editor
@@ -142,7 +153,7 @@ public class MainActivity extends ActionBarActivity {
         this.train_arrive_work_station_hour_2 = new Date((long)sharedPref.getInt("next_next_train",0)*1000).getHours();
         this.train_arrive_work_station_min_2 = new Date((long)sharedPref.getInt("next_next_train",0)*1000).getMinutes();
 
-        this.direction_name = DirectionOptions.values()[sharedPref.getInt("direction", 0)].toString();
+        this.direction_name = DirectionOptions.val(sharedPref.getInt("direction", 0));
         this.line = color_map.get(sharedPref.getInt("line", 0));
         //calculate duration in minutes between now and next train
         Date next_train_in_date = new Date((long)sharedPref.getInt("next_train",0)*1000);
@@ -150,6 +161,12 @@ public class MainActivity extends ActionBarActivity {
         long diff = next_train_in_date.getTime() - now_in_date.getTime();
         this.minutes_till_next_train = Integer.toString((int) diff / (60 * 1000) % 60);
         this.minutes_till_next_train += "min";
+
+        Log.d("asdfas nexttrain", next_train_in_date.getTime() + "");
+        Log.d("asdfas .getTime()", now_in_date.getTime() + "");
+        Date day = new Date(1437318660);
+        Log.d("asdfas day", day.getTime() + "");
+
 
         Date next_next_train_in_date = new Date((long)sharedPref.getInt("next_next_train",0)*1000);
         long diff2 = next_next_train_in_date.getTime() - now_in_date.getTime();
@@ -191,16 +208,6 @@ public class MainActivity extends ActionBarActivity {
     public void gotoStationSetting(View view) {
         Intent stationSettingIntent = new Intent(this, SetStopAndDirectionActivity.class);
         startActivity(stationSettingIntent);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Log.d("ActivityLifeCycleDemo", "onResume");
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-        String userName = sharedPref.getString("isDismiss", "not dismissed");
-
-        Log.d("", userName);
     }
 
     public NotificationCompat.Builder createNotification(String notification) {
