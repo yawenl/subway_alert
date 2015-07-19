@@ -2,14 +2,13 @@ package com.example.lindsey.wayfair_alert;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
-import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.NumberPicker;
 import android.widget.TimePicker;
 
@@ -17,7 +16,8 @@ import android.widget.TimePicker;
 
 public class SetStartTimeActivity extends ActionBarActivity {
 
-
+    Resources system;
+    private TimePicker workPicker;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,7 +59,7 @@ public class SetStartTimeActivity extends ActionBarActivity {
     public void SendTime(View view){
         // hour 0 ~ 24  minute: 0 ~60
         // get the go to work time
-        TimePicker workPicker = (TimePicker) this.findViewById(R.id.startTimePicker);
+        this.workPicker = (TimePicker) this.findViewById(R.id.startTimePicker);
         int workHour = workPicker.getCurrentHour();
         int workMinute = workPicker.getCurrentMinute();
 
@@ -89,4 +89,5 @@ public class SetStartTimeActivity extends ActionBarActivity {
         finish();
         return;
     }
+
 }
