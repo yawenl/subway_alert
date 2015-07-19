@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     tools:context="com.example.lindsey.wayfair_alert.SetStopAndDirectionActivity"
+    android:background="@drawable/setting_page_background"
     >
 
 
@@ -21,7 +22,7 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@android:color/white"
+            android:background="#AAFFFFFF"
             android:layout_centerInParent="true"
             android:gravity="center_horizontal"
             android:layout_marginBottom="20dp">
@@ -47,7 +48,7 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@android:color/white"
+            android:background="#AAFFFFFF"
             android:gravity="center_horizontal"
             android:layout_marginBottom="20dp" >
             <TextView
@@ -71,7 +72,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_horizontal"
-            android:background="@android:color/white"
+            android:background="#AAFFFFFF"
             android:layout_marginBottom="20dp" >
             <TextView
                 android:layout_width="wrap_content"
