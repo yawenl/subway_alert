@@ -48,8 +48,8 @@ public class GenerateAlert extends TimerTask{
             int hour = sharedPref.getInt("workHour", 18);
             int min = sharedPref.getInt("workMinute", 0);
             int walk_time = sharedPref.getInt("walk_time", 7);
-            int line = sharedPref.getInt("line", 9);
-            int direction = sharedPref.getInt("direction", 12);
+            int line = sharedPref.getInt("line", 0);
+            int direction = sharedPref.getInt("direction", 0);
             String line_name = LineOptions.values()[line].toString();
             String station_name = "";
             editor.putString("line_name", line_name);
@@ -87,14 +87,15 @@ public class GenerateAlert extends TimerTask{
             int get_to_station = (int)(current_time/1000) + walk_time * 60;
             int upper_bound = arrival_time;
             int lower_bound = arrival_time - 240;
+            current_time = (int)(current_time/1000);
 
-            /*
+
             Log.d("current time", ""+current_time);
             Log.d("alert time", ""+alert_start_time);
             Log.d("get to station", ""+get_to_station);
             Log.d("upper", ""+upper_bound);
             Log.d("lower", ""+lower_bound);
-            */
+
 
             if (stop.equalsIgnoreCase("dismissed")) {
                 Thread.sleep(20000);
