@@ -1,11 +1,15 @@
 package com.example.lindsey.wayfair_alert;
 
 
+import android.app.Activity;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.ActionBarActivity;
@@ -16,27 +20,34 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Timer;
+import java.util.TimerTask;
 
 import enumPackage.DirectionOptions;
 import enumPackage.StationOptions;
 
 public class MainActivity extends ActionBarActivity {
 
+    public int train_arrive_work_station_hour_1 = 8;
+    public int train_arrive_work_station_min_1 = 0;
+    public int train_arrive_work_station_hour_2 = 8;
+    public int train_arrive_work_station_min_2 = 0;
+
+    public int next_train_arrive_work_station_hour = 8;
+    public int next_train_arrive_work_station_min = 0;
     private int person_home_time_hour = 18;
     private int person_home_time_min = 0;
 
     private String minutes_till_next_train;
     private String minutes_till_next_next_train;
 
-    private String work_station_name;
-    private String line;
-    private String direction_name;
-    private int work_station_walk_time = 0;
+    public String work_station_name;
+    public String line;
+    public String direction_name;
+    public int work_station_walk_time = 0;
 
     private TextView walking_time;
     //private Button time_to_home_station_button;
@@ -46,9 +57,12 @@ public class MainActivity extends ActionBarActivity {
     private TextView next_train_work;
     private TextView next_next_train_work;
 
-    private Map<Integer, String> color_map = new HashMap<Integer, String>();
+    Timer timer;
+    TimerTask timerTask;
+    final Handler handler = new Handler();
 
-    private TrainInfo train_info;
+
+    public Map<Integer, String> color_map = new HashMap<Integer, String>();
 
     //10.0.2.2 is the address used by the Android emulators to refer to the host address
     // change this to the IP of another host if required
@@ -63,22 +77,63 @@ public class MainActivity extends ActionBarActivity {
         editor.putString("isDismiss", "not dismissed");
         editor.commit();
         Log.d("main_ac", sharedPref.getString("isDismiss", "not dismissed"));
-        Timer timer = new Timer();
-        TrainInfo train_info = new TrainInfo();
-        GenerateAlert ga = new GenerateAlert(train_info, this);
-        timer.schedule(ga, 0, 5000);
 
-        color_map.put(0, "FFAD5C");
-        color_map.put(1, "94FF94");
-        color_map.put(2, "A9E9FF");
-        color_map.put(3, "FF5C5C");
+        startTimer();
+
+        color_map.put(0, "#FFAD5C");
+        color_map.put(1, "#94FF94");
+        color_map.put(2, "#A9E9FF");
+        color_map.put(3, "#FF5C5C");
+
         getValues();
         setTrainArriveTime();
         setEndWorkTime();
         setStationAndDirection();
         setWalkTime();
-        Log.d("main:", train_info.notification);
         // createNotification(train_info.notification);
+    }
+
+
+    public void startTimer() {
+        //set a new Timer
+        timer = new Timer();
+
+        //initialize the TimerTask's job
+        initializeTimerTask(this);
+
+        //schedule the timer, after the first 5000ms the TimerTask will run every 10000ms
+        timer.schedule(timerTask, 5000, 10000); //
+    }
+
+    public void initializeTimerTask(final MainActivity main) {
+
+        timerTask = new TimerTask() {
+            public void run() {
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        TrainInfo trainInfo = new TrainInfo();
+                        new GenerateAlert(trainInfo, main).run();
+                        getValues();
+                        setTrainArriveTime();
+                        setWalkTime();
+                        setEndWorkTime();
+                        setStationAndDirection();
+                    }
+                });
+
+            }
+        };
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getValues();
+        setTrainArriveTime();
+        setEndWorkTime();
+        setStationAndDirection();
+        setWalkTime();
     }
 
     public void getValues() {
@@ -86,14 +141,22 @@ public class MainActivity extends ActionBarActivity {
         //now get Editor
         SharedPreferences.Editor editor = sharedPref.edit();
 
-        this.person_home_time_hour = sharedPref.getInt("homeHour", 18);
-        this.person_home_time_min = sharedPref.getInt("homeMinute", 0);
+        this.person_home_time_hour = sharedPref.getInt("workHour", 18);
+        this.person_home_time_min = sharedPref.getInt("workMinute", 0);
         //this.home_station_walk_time = sharedPref.getInt("home_station_walk_time", 5);
         this.work_station_walk_time = sharedPref.getInt("work_station_walk_time", 5);
         this.work_station_name = StationOptions.values()[sharedPref.getInt("station", 0)].toString();
-
+        
         this.direction_name = DirectionOptions.values()[sharedPref.getInt("direction", 0)].toString();
         this.line = color_map.get(sharedPref.getInt("line", 0));
+
+        this.train_arrive_work_station_hour_1 = new Date((long)sharedPref.getInt("next_train",0)*1000).getHours();
+        this.train_arrive_work_station_min_1 = new Date((long)sharedPref.getInt("next_train",0)*1000).getMinutes();
+        this.train_arrive_work_station_hour_2 = new Date((long)sharedPref.getInt("next_next_train",0)*1000).getHours();
+        this.train_arrive_work_station_min_2 = new Date((long)sharedPref.getInt("next_next_train",0)*1000).getMinutes();
+
+        this.direction_name = DirectionOptions.val(sharedPref.getInt("direction", 0));
+
         //calculate duration in minutes between now and next train
         Date next_train_in_date = new Date((long)sharedPref.getInt("next_train",0)*1000);
         Date now_in_date = new Date();
@@ -123,9 +186,11 @@ public class MainActivity extends ActionBarActivity {
     public void setStationAndDirection() {
         this.work_station_name_view = (TextView)findViewById(R.id.work_station_name);
         this.work_station_name_view.setText(this.work_station_name);
+        this.work_station_name_view.setTextColor(Color.parseColor(line));
 
         this.work_station_direction = (TextView)findViewById(R.id.work_station_direction);
         this.work_station_direction.setText(this.direction_name);
+        this.work_station_direction.setTextColor(Color.parseColor(line));
     }
 
     public void setWalkTime() {
@@ -141,16 +206,6 @@ public class MainActivity extends ActionBarActivity {
     public void gotoStationSetting(View view) {
         Intent stationSettingIntent = new Intent(this, SetStopAndDirectionActivity.class);
         startActivity(stationSettingIntent);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Log.d("ActivityLifeCycleDemo", "onResume");
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-        String userName = sharedPref.getString("isDismiss", "not dismissed");
-
-        Log.d("", userName);
     }
 
     public NotificationCompat.Builder createNotification(String notification) {
@@ -196,7 +251,6 @@ public class MainActivity extends ActionBarActivity {
         return mBuilder;
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -219,4 +273,9 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void sendMessage(){
+        Intent intent = new Intent(this, SetStartTimeActivity.class);
+        startActivity(intent);
+
+    }
 }

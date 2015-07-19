@@ -6,8 +6,9 @@ package enumPackage;
  * Created by lubron on 7/18/15.
  */
 public enum StationOptions {
-    Copley,
-    BackBay;
+    BackBay,
+    Copley;
+
 
     public static String val(int x) {
         switch(x) {
@@ -16,6 +17,6 @@ public enum StationOptions {
             case 1:
                 return enumPackage.StationOptions.BackBay.name();
         }
-        return enumPackage.StationOptions.Copley.name();
+        return enumPackage.StationOptions.BackBay.name();
     }
 }

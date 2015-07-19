@@ -34,10 +34,8 @@ public class SetStopAndDirectionActivity extends ActionBarActivity {
         NumberPicker stationPick = (NumberPicker) this.findViewById(R.id.stationPicker);
         stationPick.setMinValue(0);
         stationPick.setMaxValue(StationOptions.values().length - 1);
-
-        for(Enum e : StationOptions.values()){
-
-        }
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        stationPick.setValue(sharedPreferences.getInt("station", 0));
         String [] station = new String[StationOptions.values().length];
         for(int i = 0; i < StationOptions.values().length; i++){
             station[i] = StationOptions.values()[i].toString();
@@ -51,14 +49,12 @@ public class SetStopAndDirectionActivity extends ActionBarActivity {
         NumberPicker directionPick = (NumberPicker) this.findViewById(R.id.directionPicker);
         directionPick.setMinValue(0);
         directionPick.setMaxValue(DirectionOptions.values().length - 1);
-
-        for(Enum e : DirectionOptions.values()){
-
-        }
         String [] direction = new String[DirectionOptions.values().length];
         for(int i = 0; i < DirectionOptions.values().length; i++){
             direction[i] = DirectionOptions.values()[i].toString();
         }
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        directionPick.setValue(sharedPreferences.getInt("direction", 0));
 
         directionPick.setDisplayedValues(direction);
         directionPick.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
@@ -68,6 +64,8 @@ public class SetStopAndDirectionActivity extends ActionBarActivity {
         NumberPicker linePick = (NumberPicker) this.findViewById(R.id.linePicker);
         linePick.setMinValue(0);
         linePick.setMaxValue(LineOptions.values().length - 1);
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        linePick.setValue(sharedPreferences.getInt("line", 0));
 
         String [] line = new String[LineOptions.values().length];
         for(int i = 0; i < LineOptions.values().length; i++){
