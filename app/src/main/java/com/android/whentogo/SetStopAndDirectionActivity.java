@@ -1,4 +1,4 @@
-package com.example.lindsey.wayfair_alert;
+package com.android.whentogo;
 
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -9,6 +9,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.NumberPicker;
+
+import com.example.lindsey.wayfair_alert.R;
 
 import enumPackage.DirectionOptions;
 import enumPackage.LineOptions;

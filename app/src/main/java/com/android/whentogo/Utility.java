@@ -1,4 +1,4 @@
-package com.example.lindsey.wayfair_alert;
+package com.android.whentogo;
 
 import android.app.AlertDialog;
 import android.content.Context;

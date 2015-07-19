@@ -1,25 +1,18 @@
-package com.example.lindsey.wayfair_alert;
+package com.android.whentogo;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Vibrator;
 import android.preference.PreferenceManager;
-import android.text.Layout;
-import android.text.format.Time;
 import android.util.Log;
-import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.Date;
 import java.util.TimerTask;
-import com.example.lindsey.wayfair_alert.JSONParser;
-import com.example.lindsey.wayfair_alert.MainActivity;
 
-import enumPackage.DirectionOptions;
 import enumPackage.LineOptions;
 
 /**
@@ -210,7 +203,7 @@ public class GenerateAlert extends TimerTask{
                     print_hour = "0"+Integer.toString(train_hour);
                 }
 
-                generate_notification = "Hurry up. Train to " + trip_headsign + " will arrive at "
+                generate_notification = "Get ready to go! Train to " + trip_headsign + " will arrive at "
                         + print_hour + ":" + print_minute;
             } catch (Exception e) {
                 e.printStackTrace();

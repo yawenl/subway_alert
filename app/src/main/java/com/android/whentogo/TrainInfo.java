@@ -1,4 +1,4 @@
-package com.example.lindsey.wayfair_alert;
+package com.android.whentogo;
 
 /**
  * Created by dameng on 7/18/2015.

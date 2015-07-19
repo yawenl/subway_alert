@@ -1,11 +1,10 @@
-package com.example.lindsey.wayfair_alert;
+package com.android.whentogo;
 
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
@@ -16,6 +15,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+
+import com.example.lindsey.wayfair_alert.R;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -269,5 +270,11 @@ public class MainActivity extends ActionBarActivity {
         Intent intent = new Intent(this, SetStartTimeActivity.class);
         startActivity(intent);
 
+    }
+
+    public void clearEditor(View view) {
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.clear();
     }
 }
