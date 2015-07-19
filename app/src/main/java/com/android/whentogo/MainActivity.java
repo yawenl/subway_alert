@@ -91,6 +91,11 @@ public class MainActivity extends ActionBarActivity {
         // createNotification(train_info.notification);
     }
 
+    public void clearEditor(View view) {
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.clear();
+    }
 
     public void startTimer() {
         //set a new Timer

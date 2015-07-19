@@ -18,6 +18,7 @@
             android:orientation="vertical"
             android:paddingTop="80dp">
 
+
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -154,7 +155,6 @@
                     android:onClick="clearEditor" />
 
         </LinearLayout>
-
     </RelativeLayout>
 
 
