@@ -9,6 +9,7 @@ import android.preference.PreferenceManager;
 import android.text.Layout;
 import android.text.format.Time;
 import android.util.Log;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -29,11 +30,13 @@ public class GenerateAlert extends TimerTask{
     public TrainInfo train_info;
     public MainActivity main;
 
+
     public static String TAG = GenerateAlert.class.getSimpleName();
 
     public GenerateAlert(TrainInfo train_info, MainActivity main){
         this.train_info = train_info;
         this.main = main;
+
     }
 
     public void run() {
@@ -105,11 +108,6 @@ public class GenerateAlert extends TimerTask{
                 main.createNotification(this.train_info.notification);
             }
 
-            main.getValues();
-            main.setTrainArriveTime();
-            main.setEndWorkTime();
-            main.setStationAndDirection();
-            main.setWalkTime();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -211,7 +209,7 @@ public class GenerateAlert extends TimerTask{
                 generate_notification = "There is no train available now";
                 return generate_notification;
             }
-            
+
             editor.putInt("arrival_time", predict_arrival_time);
             editor.commit();
             return generate_notification;

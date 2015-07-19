@@ -1,6 +1,7 @@
 package com.example.lindsey.wayfair_alert;
 
 
+import android.app.Activity;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
@@ -21,40 +22,41 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Timer;
+import java.util.TimerTask;
 
 import enumPackage.DirectionOptions;
 import enumPackage.StationOptions;
 
 public class MainActivity extends ActionBarActivity {
 
-    private int person_home_time_hour = 18;
-    private int person_home_time_min = 0;
-    private int train_arrive_work_station_hour_1 = 8;
-    private int train_arrive_work_station_min_1 = 0;
-    private int train_arrive_work_station_hour_2 = 8;
-    private int train_arrive_work_station_min_2 = 0;
+    public int person_home_time_hour = 18;
+    public int person_home_time_min = 0;
+    public int train_arrive_work_station_hour_1 = 8;
+    public int train_arrive_work_station_min_1 = 0;
+    public int train_arrive_work_station_hour_2 = 8;
+    public int train_arrive_work_station_min_2 = 0;
 
-    private int next_train_arrive_work_station_hour = 8;
-    private int next_train_arrive_work_station_min = 0;
+    public int next_train_arrive_work_station_hour = 8;
+    public int next_train_arrive_work_station_min = 0;
 
-    private String work_station_name;
-    private String line;
-    private String direction_name;
-    private int work_station_walk_time = 0;
+    public String work_station_name;
+    public String line;
+    public String direction_name;
+    public int work_station_walk_time = 0;
 
-    private Button time_to_work_station_button;
-    private Button time_to_home_station_button;
-    private Button go_to_home_time_button;
-    private Button station_name_button;
-    private TextView leave_work_text;
-    private TextView leave_home_text;
-    private TextView train_come_work_text_1;
-    private TextView train_come_work_text_2;
+    public Button time_to_work_station_button;
+    public Button time_to_home_station_button;
+    public Button go_to_home_time_button;
+    public Button station_name_button;
+    public TextView leave_work_text;
+    public TextView leave_home_text;
+    public TextView train_come_work_text_1;
+    public TextView train_come_work_text_2;
 
-    private Map<Integer, String> color_map = new HashMap<Integer, String>();
+    public Map<Integer, String> color_map = new HashMap<Integer, String>();
 
-    private ProgressBar progressBar;
-    private TrainInfo train_info;
+    public ProgressBar progressBar;
+    public TrainInfo train_info;
 
     //10.0.2.2 is the address used by the Android emulators to refer to the host address
     // change this to the IP of another host if required
@@ -71,22 +73,40 @@ public class MainActivity extends ActionBarActivity {
         editor.putString("isDismiss", "not dismissed");
         editor.commit();
         Log.d("main_ac", sharedPref.getString("isDismiss", "not dismissed"));
+
         Timer timer = new Timer();
         TrainInfo train_info = new TrainInfo();
         GenerateAlert ga = new GenerateAlert(train_info, this);
-        timer.schedule(ga, 0, 5000);
+        timer.schedule(ga, 0, 10000);
+
+
+        Timer timer_main = new Timer();
+        TimerTask timerTask = new TimerTask() {
+            public void run() {
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
+            }
+        };
+        timer_main.schedule(timerTask, 30000);
+
+
+
 
         color_map.put(0, "FFAD5C");
         color_map.put(1, "94FF94");
         color_map.put(2, "A9E9FF");
         color_map.put(3, "FF5C5C");
+
         getValues();
         setTrainArriveTime();
         setEndWorkTime();
         setStationAndDirection();
         setWalkTime();
-        Log.d("main:", train_info.notification);
-       // createNotification(train_info.notification);
+
+
+
+        // createNotification(train_info.notification);
     }
 
     public void getValues() {
