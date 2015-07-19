@@ -141,8 +141,8 @@ public class MainActivity extends ActionBarActivity {
         //now get Editor
         SharedPreferences.Editor editor = sharedPref.edit();
 
-        this.person_home_time_hour = sharedPref.getInt("homeHour", 18);
-        this.person_home_time_min = sharedPref.getInt("homeMinute", 0);
+        this.person_home_time_hour = sharedPref.getInt("workHour", 18);
+        this.person_home_time_min = sharedPref.getInt("workMinute", 0);
         //this.home_station_walk_time = sharedPref.getInt("home_station_walk_time", 5);
         this.work_station_walk_time = sharedPref.getInt("work_station_walk_time", 5);
         this.work_station_name = StationOptions.values()[sharedPref.getInt("station", 0)].toString();

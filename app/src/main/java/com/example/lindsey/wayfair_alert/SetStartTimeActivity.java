@@ -24,6 +24,8 @@ public class SetStartTimeActivity extends ActionBarActivity {
 
         setContentView(R.layout.activity_set_start_time);
         workToStation();
+        goToWorkTime();
+
     }
 
     @Override
@@ -49,11 +51,19 @@ public class SetStartTimeActivity extends ActionBarActivity {
     }
 
     private void workToStation(){
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         NumberPicker numberPick = (NumberPicker) this.findViewById(R.id.eWorkToStation);
         numberPick.setMinValue(0);
         numberPick.setMaxValue(60);
-
+        numberPick.setValue(sharedPreferences.getInt("work_station_walk_time", 0));
         numberPick.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
+    }
+
+    private void goToWorkTime(){
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        TimePicker timePick = (TimePicker) this.findViewById(R.id.startTimePicker);
+        timePick.setCurrentHour(sharedPreferences.getInt("workHour", 0));
+        timePick.setCurrentMinute(sharedPreferences.getInt("workMinute", 0));
     }
 
     public void SendTime(View view){
@@ -77,7 +87,7 @@ public class SetStartTimeActivity extends ActionBarActivity {
         /*editor.putInt("homeHour", homeHour);
         editor.putInt("homeMinute", homeMinute);*/
         // estimate time from work to station
-        editor.putInt("eWorkToStation", eWorkToStation);
+        editor.putInt("work_station_walk_time", eWorkToStation);
 
         Intent intent = new Intent(this, SetStopAndDirectionActivity.class);
         startActivity(intent);
