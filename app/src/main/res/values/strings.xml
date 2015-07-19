@@ -8,5 +8,6 @@
     <string name="snooze_notifier">DismissNotifier</string>
     <string name="title_activity_index">IndexActivity</string>
     <string name="title_activity_set_start_time">SetStartTimeActivity</string>
+    <string name="clear"><u>Clear Setting</u></string>
     <string name="title_activity_set_stop_and_direction">SetStopAndDirectionActivity</string>
 </resources>

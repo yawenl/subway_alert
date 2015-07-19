@@ -3,7 +3,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="horizontal"
-    android:background="#ff525252"
+    android:background="@drawable/setting_page_background"
     android:paddingLeft="15dp"
     android:paddingRight="15dp"
     android:paddingTop="15dp">
@@ -22,9 +22,9 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal"
                 android:layout_marginBottom="10dp"
-                android:background="#BBffffff">
+                android:background="#aaffffff">
 
                         <NumberPicker
                             android:layout_width="wrap_content"
@@ -46,7 +46,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:background="#BBffffff"
+                android:background="#aaffffff"
                 android:layout_marginBottom="10dp"
                 android:layout_gravity="center_horizontal">
                     <TimePicker
@@ -60,12 +60,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Off Work"
-                    android:id="@+id/eWTS"
+                    android:id="@+id/eOWT"
                     android:layout_gravity="center_vertical" />
 
             </LinearLayout>
-
-    <Button
+            <Button
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="Confirm"

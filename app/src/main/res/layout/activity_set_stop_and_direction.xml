@@ -1,86 +1,107 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.example.lindsey.wayfair_alert.SetStopAndDirectionActivity">
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    tools:context="com.example.lindsey.wayfair_alert.SetStopAndDirectionActivity"
+    android:background="@drawable/setting_page_background"
+    >
 
 
-
-    <TableLayout
+    <RelativeLayout
+        android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:stretchColumns="1"
-        >
-        <TextView
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="15dp">
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Line Color"
-            android:id="@+id/LineText"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="3dp"
-            android:layout_marginLeft="5dp" />
-        <NumberPicker
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/linePicker"
-            android:layout_marginTop="-30dp"
-            android:paddingTop="3dp"></NumberPicker>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Start Station"
-            android:id="@+id/stationText"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="3dp"
-            android:layout_marginLeft="5dp" />
-        <!-- everything you already have -->
-        <NumberPicker
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/stationPicker"
-            android:layout_marginTop="-30dp"
-            android:paddingTop="3dp"
+            android:layout_gravity="center_horizontal">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#AAFFFFFF"
+            android:layout_centerInParent="true"
+            android:gravity="center_horizontal"
+            android:layout_marginBottom="20dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Subway Line"
+                android:id="@+id/LineText"
+                android:layout_gravity="center"
+                android:layout_marginRight="20dp" />
 
-            ></NumberPicker>
+            <NumberPicker
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/linePicker"
+                android:orientation="vertical"
+                android:baselineAligned="true"
+                android:layout_gravity="center"></NumberPicker>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Direction"
-            android:id="@+id/directionText"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="3dp"
-            android:layout_marginLeft="5dp" />
-        <NumberPicker
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/directionPicker"
-            android:layout_marginTop="-30dp"
-            android:paddingTop="3dp"></NumberPicker>
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#AAFFFFFF"
+            android:gravity="center_horizontal"
+            android:layout_marginBottom="20dp" >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Start Station"
+                android:id="@+id/stationText"
+                android:layout_gravity="center"
+                android:layout_marginRight="20dp" />
+            <!-- everything you already have -->
+            <NumberPicker
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/stationPicker"
+                android:layout_gravity="center_horizontal"></NumberPicker>
+        </LinearLayout>
 
-
-        <Button
-            android:layout_width="191dp"
-            android:layout_height="wrap_content"
-            android:text="Confirm"
-            android:id="@+id/button"
-            android:layout_gravity="center_horizontal|bottom"
-            android:textSize="20dp"
-            android:layout_marginBottom="5dp"
-            android:paddingTop="3dp"
-            android:maxWidth="140dp"
-            android:layout_marginLeft="80dp"
-            android:layout_marginRight="80dp"
-            android:padding="3dip"
-
-            android:clickable="true"
-            android:onClick="SendStationAndDirection"
-            android:nestedScrollingEnabled="false" />
-
-    </TableLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:background="#AAFFFFFF"
+            android:layout_marginBottom="20dp" >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Direction"
+                android:id="@+id/directionText"
+                android:layout_gravity="center"
+                android:layout_marginRight="20dp" />
+            <NumberPicker
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/directionPicker"
+                android:layout_marginTop="-30dp"
+                android:paddingTop="3dp"
+                android:layout_gravity="center_horizontal"></NumberPicker>
+        </LinearLayout>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Confirm"
+                android:id="@+id/button"
+                android:layout_gravity="center_horizontal"
+                android:textSize="20dp"
+                android:clickable="true"
+                android:onClick="SendStationAndDirection"
+                android:nestedScrollingEnabled="false"
+                android:background="@drawable/bar_2"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+    </RelativeLayout>
 </ScrollView>
