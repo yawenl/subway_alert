@@ -19,6 +19,7 @@ import com.example.lindsey.wayfair_alert.JSONParser;
 import com.example.lindsey.wayfair_alert.MainActivity;
 
 import enumPackage.DirectionOptions;
+import enumPackage.LineOptions;
 
 /**
  * Created by dameng on 7/18/2015.
@@ -28,7 +29,6 @@ public class GenerateAlert extends TimerTask{
     public TrainInfo train_info;
     public MainActivity main;
 
-    public static String URL = "http://realtime.mbta.com/developer/api/v2/predictionsbystop?api_key=wX9NwuHnZU2ToO7GmGR9uw&stop=place-bbsta&format=json";
     public static String TAG = GenerateAlert.class.getSimpleName();
 
     public GenerateAlert(TrainInfo train_info, MainActivity main){
@@ -38,10 +38,36 @@ public class GenerateAlert extends TimerTask{
 
     public void run() {
         try {
-            int i = DirectionOptions.Inbound.ordinal();
-            this.train_info.notification = (new GenerateNotification(main).execute(URL)).get();
-            Log.d(TAG, this.train_info.notification);
+
             SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(main);
+            SharedPreferences.Editor editor = sharedPref.edit();
+
+            int hour = sharedPref.getInt("workHour", 18);
+            int min = sharedPref.getInt("workMinute", 0);
+            int walk_time = sharedPref.getInt("walk_time", 7);
+            int line = sharedPref.getInt("line", 9);
+            int direction = sharedPref.getInt("direction", 12);
+            String line_name = LineOptions.values()[line].toString();
+            String station_name = "";
+            editor.putString("line_name", line_name);
+            editor.commit();
+
+            if (line_name.equalsIgnoreCase("orange")) {
+                station_name = "place-bbsta";
+            } else if (line_name.equalsIgnoreCase("green")) {
+                station_name = "place-coecl";
+            }
+
+            String url = "http://realtime.mbta.com/developer/api/v2/predictionsbystop?api_key=wX9NwuHnZU2ToO7GmGR9uw&stop=" + station_name + "&format=json";
+
+            Log.d("hour", "" + hour);
+            Log.d("min", ""+min);
+            Log.d("line name", line_name);
+            Log.d("direction", ""+direction);
+
+            this.train_info.notification = (new GenerateNotification(main).execute(url)).get();
+            Log.d(TAG, this.train_info.notification);
+
             String stop = sharedPref.getString("isDismiss", "not dismissed");
             Log.d("stop", stop);
             Date date = new Date();
@@ -51,18 +77,7 @@ public class GenerateAlert extends TimerTask{
             date.setSeconds(0);
             long base_time = date.getTime();
 
-            SharedPreferences.Editor editor = sharedPref.edit();
 
-            int hour = sharedPref.getInt("workHour", 18);
-            int min = sharedPref.getInt("workMinute", 0);
-            int walk_time = sharedPref.getInt("walk_time", 5);
-            String line = sharedPref.getString("line", "default");
-            int direction = sharedPref.getInt("direction", 12);
-
-            Log.d("hour", ""+hour);
-            Log.d("min", ""+min);
-            Log.d("line", line);
-            Log.d("direction", ""+direction);
 
             int arrival_time = sharedPref.getInt("arrival_time", 0);
             int alert_start_time = (int)(base_time/1000) + (hour * 3600 + min * 60 - 180);
@@ -70,12 +85,13 @@ public class GenerateAlert extends TimerTask{
             int upper_bound = arrival_time;
             int lower_bound = arrival_time - 240;
 
-
+            /*
             Log.d("current time", ""+current_time);
             Log.d("alert time", ""+alert_start_time);
             Log.d("get to station", ""+get_to_station);
             Log.d("upper", ""+upper_bound);
             Log.d("lower", ""+lower_bound);
+            */
 
             if (stop.equalsIgnoreCase("dismissed")) {
                 Thread.sleep(20000);
@@ -88,6 +104,12 @@ public class GenerateAlert extends TimerTask{
                 v.vibrate(500);
                 main.createNotification(this.train_info.notification);
             }
+
+            main.getValues();
+            main.setTrainArriveTime();
+            main.setEndWorkTime();
+            main.setStationAndDirection();
+            main.setWalkTime();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -112,7 +134,6 @@ public class GenerateAlert extends TimerTask{
             SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(main);
             SharedPreferences.Editor editor = sharedPref.edit();
             try {
-
                 String stop_id = json.getString("stop_id");
                 String stop_name = json.getString("stop_name");
                 String trip_headsign = "";
@@ -120,24 +141,41 @@ public class GenerateAlert extends TimerTask{
                 for (int i = 0; i < modes.length(); ++i) {
                     JSONObject mode = (JSONObject) modes.get(i);
                     int type = mode.getInt("route_type");
+                    //type: subway
                     if (type == 1){
                         JSONArray routes = mode.getJSONArray("route");
                         for (int j = 0; j < routes.length(); ++j) {
                             JSONObject route = (JSONObject) routes.get(j);
                             String route_id = route.getString("route_id");
-                            if (route_id.equalsIgnoreCase("orange")) {
+                            //route_id compares line name(orange, green)
+                            if (route_id.equalsIgnoreCase(sharedPref.getString("line_name", "or"))) {
                                 JSONArray directions = route.getJSONArray("direction");
                                 for (int k = 0; k < directions.length(); ++k) {
                                     JSONObject direction = (JSONObject) directions.get(k);
                                     int direction_id = direction.getInt("direction_id");
                                     JSONArray trips = direction.getJSONArray("trip");
-                                    if (direction_id == 0) {
+                                    //direction_id compares direction(0, 1)
+                                    if (direction_id == sharedPref.getInt("direction", 12)) {
+                                        for (int m = 0; m < 2 && m < trips.length(); ++m) {
+                                            JSONObject trip = (JSONObject) trips.get(m);
+                                            int next_arrival_time = trip.getInt("pre_dt");
+                                            Log.d("next arrival", ""+next_arrival_time);
+                                            if (m == 0) {
+                                                editor.putInt("next_train", next_arrival_time);
+                                            } else if (m == 1) {
+                                                editor.putInt("next_next_train", next_arrival_time);
+                                            }
+                                        }
+                                        editor.commit();
+                                        Log.d("next", "" + sharedPref.getInt("next_train", 0));
+                                        Log.d("next next", ""+sharedPref.getInt("next_next_train", 0));
+
                                         for (int m = 0; m < trips.length(); ++m) {
                                             JSONObject trip = (JSONObject) trips.get(m);
                                             int current_time = (int)(System.currentTimeMillis()/1000);
-                                            int walk_time = sharedPref.getInt("walk_time", 0) * 60;
-                                            Log.d("in loop walk_time time", ""+walk_time);
-                                            Log.d("in loop current_time", ""+current_time);
+                                            int walk_time = sharedPref.getInt("walk_time", 7) * 60;
+                                            //Log.d("in loop walk_time time", ""+walk_time);
+                                            //Log.d("in loop current_time", ""+current_time);
                                             if (current_time + walk_time + 60 < trip.getInt("pre_dt")) {
                                                 predict_arrival_time = trip.getInt("pre_dt");
                                                 trip_headsign = trip.getString("trip_headsign");
@@ -146,16 +184,7 @@ public class GenerateAlert extends TimerTask{
                                             }
                                         }
 
-                                        for (int m = 0; m < 2 && m < trips.length(); ++m) {
-                                            JSONObject trip = (JSONObject) trips.get(m);
-                                            int next_arrival_time = trip.getInt("pre_dt");
-                                            if (m == 0) {
-                                                editor.putInt("next_train", next_arrival_time);
-                                            } else if (m == 1) {
-                                                editor.putInt("next_next_train", next_arrival_time);
-                                            }
-                                        }
-                                        editor.commit();
+
                                     }
                                 }
                             }
@@ -177,7 +206,6 @@ public class GenerateAlert extends TimerTask{
 
                 generate_notification = "Please leave in 3 minutes Train to " + trip_headsign + " will arrive at "
                         + print_hour + ":" + print_minute;
-                Log.d(TAG, json.toString());
             } catch (Exception e) {
                 e.printStackTrace();
                 generate_notification = "There is no train available now";
