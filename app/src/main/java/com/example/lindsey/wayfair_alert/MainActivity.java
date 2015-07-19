@@ -5,7 +5,9 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.ActionBarActivity;
@@ -17,10 +19,15 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Timer;
+import java.util.TimerTask;
+import java.util.logging.LogRecord;
 
 import enumPackage.DirectionOptions;
 import enumPackage.StationOptions;
@@ -50,6 +57,10 @@ public class MainActivity extends ActionBarActivity {
 
     private TrainInfo train_info;
 
+    Timer timer;
+    TimerTask timerTask;
+    final Handler handler = new Handler();
+
     //10.0.2.2 is the address used by the Android emulators to refer to the host address
     // change this to the IP of another host if required
 
@@ -63,10 +74,8 @@ public class MainActivity extends ActionBarActivity {
         editor.putString("isDismiss", "not dismissed");
         editor.commit();
         Log.d("main_ac", sharedPref.getString("isDismiss", "not dismissed"));
-        Timer timer = new Timer();
-        TrainInfo train_info = new TrainInfo();
-        GenerateAlert ga = new GenerateAlert(train_info, this);
-        timer.schedule(ga, 0, 5000);
+
+        startTimer();
 
         color_map.put(0, "FFAD5C");
         color_map.put(1, "94FF94");
@@ -77,8 +86,37 @@ public class MainActivity extends ActionBarActivity {
         setEndWorkTime();
         setStationAndDirection();
         setWalkTime();
-        Log.d("main:", train_info.notification);
-        // createNotification(train_info.notification);
+
+    }
+
+    public void startTimer() {
+        //set a new Timer
+        timer = new Timer();
+
+        //initialize the TimerTask's job
+        initializeTimerTask(this);
+
+        //schedule the timer, after the first 5000ms the TimerTask will run every 10000ms
+        timer.schedule(timerTask, 5000, 10000); //
+    }
+
+    public void initializeTimerTask(final MainActivity main) {
+
+        timerTask = new TimerTask() {
+            public void run() {
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        TrainInfo trainInfo = new TrainInfo();
+                        new GenerateAlert(trainInfo, main).run();
+                        getValues();
+                        setTrainArriveTime();
+                        setWalkTime();
+                    }
+                });
+
+            }
+        };
     }
 
     public void getValues() {

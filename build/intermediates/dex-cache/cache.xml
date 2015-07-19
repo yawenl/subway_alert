@@ -2,46 +2,46 @@
 <items version="2" >
 
     <item
-        jar="/Users/Lindsey/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/22.1.1/support-annotations-22.1.1.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="01d051a6bfb1218b1db2d3a5af0480ac2c25c42a">
-        <dex dex="/Users/Lindsey/AndroidStudioProjects/subway_alert/app/build/intermediates/pre-dexed/debug/support-annotations-22.1.1-d13143a1c79ca91d8e22bc1579cdd1fb7698dfcb.jar" />
-    </item>
-    <item
-        jar="/Users/Lindsey/AndroidStudioProjects/subway_alert/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.1.1/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="c95ba8152923e4872e86a82cfcba9a51c0214328">
-        <dex dex="/Users/Lindsey/AndroidStudioProjects/subway_alert/app/build/intermediates/pre-dexed/debug/classes-5c8e6b74e0105669939eda6849840e9af9fbae50.jar" />
-    </item>
-    <item
-        jar="/Users/Lindsey/AndroidStudioProjects/subway_alert/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.1.1/libs/internal_impl-22.1.1.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="9e070ad32b2700b0343e8e0cccc437733d91ba3a">
-        <dex dex="/Users/Lindsey/AndroidStudioProjects/subway_alert/app/build/intermediates/pre-dexed/debug/internal_impl-22.1.1-b0dfb8b0fd4e4bb0c68418d67c48ca3b7c3e2c1e.jar" />
-    </item>
-    <item
-        jar="/Users/Lindsey/.gradle/caches/modules-2/files-2.1/com.parse.bolts/bolts-android/1.2.0/6ee2953ccf51ce72b6d548c30c4633b99eb4f9dd/bolts-android-1.2.0.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="6ee2953ccf51ce72b6d548c30c4633b99eb4f9dd">
-        <dex dex="/Users/Lindsey/AndroidStudioProjects/subway_alert/app/build/intermediates/pre-dexed/debug/bolts-android-1.2.0-40f25f3e3a52047380d7ee661e1413b3e15f9518.jar" />
-    </item>
-    <item
-        jar="/Users/Lindsey/AndroidStudioProjects/subway_alert/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.1/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="a3ff3c506644c820eb2bdf06e8339f72be578551">
-        <dex dex="/Users/Lindsey/AndroidStudioProjects/subway_alert/app/build/intermediates/pre-dexed/debug/classes-5af69a8c44dd35e4a09ea08f454383e4284683e6.jar" />
-    </item>
-    <item
-        jar="/Users/Lindsey/AndroidStudioProjects/subway_alert/app/libs/volley.jar"
+        jar="D:\subway_alert\app\libs\volley.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="d4aaa36e04ee71a83444f8367c97a46fda662d2c">
-        <dex dex="/Users/Lindsey/AndroidStudioProjects/subway_alert/app/build/intermediates/pre-dexed/debug/volley-c1163671849ec608ed66a3247c9204d79d48c7ca.jar" />
+        <dex dex="D:\subway_alert\app\build\intermediates\pre-dexed\debug\volley-fbb3450e77ab549ef67f8a67b2288ed14b3f029e.jar" />
+    </item>
+    <item
+        jar="D:\subway_alert\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.1.1\libs\internal_impl-22.1.1.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="9e070ad32b2700b0343e8e0cccc437733d91ba3a">
+        <dex dex="D:\subway_alert\app\build\intermediates\pre-dexed\debug\internal_impl-22.1.1-e8e0d2950ae3663360b71ee63999b02d1d0ddb84.jar" />
+    </item>
+    <item
+        jar="D:\subway_alert\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.1.1\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="c95ba8152923e4872e86a82cfcba9a51c0214328">
+        <dex dex="D:\subway_alert\app\build\intermediates\pre-dexed\debug\classes-0abc2042743db293e73605e83f85640702310aa3.jar" />
+    </item>
+    <item
+        jar="D:\subway_alert\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.1.1\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="a3ff3c506644c820eb2bdf06e8339f72be578551">
+        <dex dex="D:\subway_alert\app\build\intermediates\pre-dexed\debug\classes-f8e70b6270cb5ca4d14e6ef32b1553ea740f189b.jar" />
+    </item>
+    <item
+        jar="C:\Users\Da\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\22.1.1\support-annotations-22.1.1.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="01d051a6bfb1218b1db2d3a5af0480ac2c25c42a">
+        <dex dex="D:\subway_alert\app\build\intermediates\pre-dexed\debug\support-annotations-22.1.1-79528e119627960200209c8831b08634a2cd29a5.jar" />
+    </item>
+    <item
+        jar="C:\Users\Da\.gradle\caches\modules-2\files-2.1\com.parse.bolts\bolts-android\1.2.0\6ee2953ccf51ce72b6d548c30c4633b99eb4f9dd\bolts-android-1.2.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="6ee2953ccf51ce72b6d548c30c4633b99eb4f9dd">
+        <dex dex="D:\subway_alert\app\build\intermediates\pre-dexed\debug\bolts-android-1.2.0-af34d14f92da2cce55ca143d9e379f9e0650617f.jar" />
     </item>
 
 </items>

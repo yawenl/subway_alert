@@ -38,7 +38,6 @@ public class GenerateAlert extends TimerTask{
 
     public void run() {
         try {
-            int i = DirectionOptions.Inbound.ordinal();
             this.train_info.notification = (new GenerateNotification(main).execute(URL)).get();
             Log.d(TAG, this.train_info.notification);
             SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(main);
@@ -52,8 +51,9 @@ public class GenerateAlert extends TimerTask{
             long base_time = date.getTime();
 
             SharedPreferences.Editor editor = sharedPref.edit();
-            editor.putInt("walk_time", 10);
-            editor.putInt("user_hour", 15);
+            editor.putInt("walk_time", 5);
+            editor.putInt("work_station_walk_time", 8);
+            editor.putInt("user_hour", 1);
             editor.putInt("user_minute", 0);
             editor.commit();
 
@@ -128,20 +128,6 @@ public class GenerateAlert extends TimerTask{
                                     int direction_id = direction.getInt("direction_id");
                                     JSONArray trips = direction.getJSONArray("trip");
                                     if (direction_id == 0) {
-                                        for (int m = 0; m < trips.length(); ++m) {
-                                            JSONObject trip = (JSONObject) trips.get(m);
-                                            int current_time = (int)(System.currentTimeMillis()/1000);
-                                            int walk_time = sharedPref.getInt("walk_time", 0) * 60;
-                                            Log.d("in loop walk_time time", ""+walk_time);
-                                            Log.d("in loop current_time", ""+current_time);
-                                            if (current_time + walk_time + 60 < trip.getInt("pre_dt")) {
-                                                predict_arrival_time = trip.getInt("pre_dt");
-                                                trip_headsign = trip.getString("trip_headsign");
-                                                Log.d("in loop arrving time", ""+predict_arrival_time);
-                                                break;
-                                            }
-                                        }
-
                                         for (int m = 0; m < 2 && m < trips.length(); ++m) {
                                             JSONObject trip = (JSONObject) trips.get(m);
                                             int next_arrival_time = trip.getInt("pre_dt");
@@ -152,6 +138,26 @@ public class GenerateAlert extends TimerTask{
                                             }
                                         }
                                         editor.commit();
+                                        Log.d("next", "" + sharedPref.getInt("next_train", 0));
+                                        Log.d("next next", "" + sharedPref.getInt("next_next_train", 0));
+
+
+                                        for (int m = 0; m < trips.length(); ++m) {
+                                            JSONObject trip = (JSONObject) trips.get(m);
+                                            int current_time = (int)(System.currentTimeMillis()/1000);
+                                            int walk_time = sharedPref.getInt("walk_time", 0) * 60;
+                                            Log.d("in loop walk_time time", ""+walk_time);
+                                            Log.d("in loop current_time", ""+current_time);
+                                            Log.d("in loop pre_dt", ""+trip.getInt("pre_dt"));
+                                            if (current_time + walk_time + 60 < trip.getInt("pre_dt")) {
+                                                predict_arrival_time = trip.getInt("pre_dt");
+                                                trip_headsign = trip.getString("trip_headsign");
+                                                Log.d("in loop arrving time", ""+predict_arrival_time);
+                                                break;
+                                            }
+                                        }
+
+
                                     }
                                 }
                             }
