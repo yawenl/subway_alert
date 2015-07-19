@@ -47,7 +47,7 @@ public class GenerateAlert extends TimerTask{
 
             int hour = sharedPref.getInt("workHour", 18);
             int min = sharedPref.getInt("workMinute", 0);
-            int walk_time = sharedPref.getInt("walk_time", 7);
+            int walk_time = sharedPref.getInt("work_station_walk_time", 7);
             int line = sharedPref.getInt("line", 0);
             int direction = sharedPref.getInt("direction", 0);
             String line_name = LineOptions.values()[line].toString();
@@ -67,6 +67,7 @@ public class GenerateAlert extends TimerTask{
             Log.d("min", ""+min);
             Log.d("line name", line_name);
             Log.d("direction", ""+direction);
+            Log.d("walk time", ""+walk_time);
 
             this.train_info.notification = (new GenerateNotification(main).execute(url)).get();
             Log.d(TAG, this.train_info.notification);
@@ -141,20 +142,20 @@ public class GenerateAlert extends TimerTask{
                     JSONObject mode = (JSONObject) modes.get(i);
                     int type = mode.getInt("route_type");
                     //type: subway
-                    if (type == 1){
+                    if (type == 1 || type == 3){
                         JSONArray routes = mode.getJSONArray("route");
                         for (int j = 0; j < routes.length(); ++j) {
                             JSONObject route = (JSONObject) routes.get(j);
                             String route_id = route.getString("route_id");
                             //route_id compares line name(orange, green)
-                            if (route_id.equalsIgnoreCase(sharedPref.getString("line_name", "or"))) {
+                            if (route_id.equalsIgnoreCase(sharedPref.getString("line_name", "orange"))) {
                                 JSONArray directions = route.getJSONArray("direction");
                                 for (int k = 0; k < directions.length(); ++k) {
                                     JSONObject direction = (JSONObject) directions.get(k);
                                     int direction_id = direction.getInt("direction_id");
                                     JSONArray trips = direction.getJSONArray("trip");
                                     //direction_id compares direction(0, 1)
-                                    if (direction_id == sharedPref.getInt("direction", 12)) {
+                                    if (direction_id == sharedPref.getInt("direction", 0)) {
                                         for (int m = 0; m < 2 && m < trips.length(); ++m) {
                                             JSONObject trip = (JSONObject) trips.get(m);
                                             int next_arrival_time = trip.getInt("pre_dt");
@@ -173,8 +174,7 @@ public class GenerateAlert extends TimerTask{
                                             JSONObject trip = (JSONObject) trips.get(m);
                                             int current_time = (int)(System.currentTimeMillis()/1000);
                                             int walk_time = sharedPref.getInt("walk_time", 7) * 60;
-                                            //Log.d("in loop walk_time time", ""+walk_time);
-                                            //Log.d("in loop current_time", ""+current_time);
+                                            Log.d("in loop walk_time time", ""+walk_time);
                                             if (current_time + walk_time + 60 < trip.getInt("pre_dt")) {
                                                 predict_arrival_time = trip.getInt("pre_dt");
                                                 trip_headsign = trip.getString("trip_headsign");
