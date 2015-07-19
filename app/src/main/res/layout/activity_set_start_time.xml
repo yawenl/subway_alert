@@ -1,74 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="fill_parent"
+    android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#fff0eef6"
-     >
+    android:orientation="horizontal"
+    android:background="#ff525252"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
+    android:paddingTop="15dp">
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
 
         <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
             android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Estimate Time To Station"
-                android:id="@+id/ehtwText"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="-5dp"
-                android:layout_gravity="center" />
+                android:orientation="horizontal"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="10dp"
+                android:background="#BBffffff">
 
-            <TableRow
-                android:layout_width="wrap_content"
+                        <NumberPicker
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/eWorkToStation"
+                            android:layout_gravity="center_horizontal"
+                            android:minHeight="50dp"
+                            style="@style/MySpinner" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Minutes walk"
+                            android:id="@+id/eWTS"
+                            android:layout_gravity="center_vertical" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:background="@android:color/white"
-                android:paddingLeft="95dp"
-                android:paddingRight="95dp">
-                <NumberPicker
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/eWorkToStation"
-                    android:layout_gravity="center"
-                    android:minHeight="50dp"
-                    style="@style/MySpinner" />
+                android:orientation="horizontal"
+                android:background="#BBffffff"
+                android:layout_marginBottom="10dp"
+                android:layout_gravity="center_horizontal">
+                    <TimePicker
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/startTimePicker"
+                        android:layout_gravity="center_horizontal"
+                        android:timePickerMode="spinner"
+                        style="@style/MySpinner" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="Minutes"
-                    android:id="@+id/eWTS"
-                    android:layout_marginLeft="3dp"
+                    android:text="Off Work"
                     android:layout_gravity="center_vertical" />
-            </TableRow>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Go To Work Time"
-                android:id="@+id/startText"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="-30dp" />
-
-            <TableRow
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="10dp">
-            <TimePicker
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/startTimePicker"
-                android:layout_gravity="center_horizontal"
-                android:timePickerMode="spinner"
-                style="@style/MySpinner"
-                android:background="@android:color/white"
-                android:paddingLeft="40dp"
-                android:paddingRight="40dp" />
-            </TableRow>
+            </LinearLayout>
             <Button
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -78,9 +72,9 @@
                 android:clickable="true"
                 android:onClick="SendTime"
                 android:nestedScrollingEnabled="false"
-                android:layout_gravity="center_vertical|bottom"
-                android:background="@drawable/bar"
-                android:textColor="@android:color/white" />
+                android:background="@drawable/bar" />
 
-            </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>
+
 </LinearLayout>

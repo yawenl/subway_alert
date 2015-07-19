@@ -5,75 +5,82 @@
     >
 
 
-    <LinearLayout
+    <RelativeLayout
         android:orientation="vertical"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" >
-
-        <RelativeLayout
+        android:layout_height="fill_parent"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="15dp">
+        <LinearLayout
             android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@android:color/white">
+            android:background="@android:color/white"
+            android:layout_centerInParent="true"
+            android:gravity="center_horizontal"
+            android:layout_marginBottom="20dp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Subway Line"
                 android:id="@+id/LineText"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="3dp"
-                android:layout_marginLeft="5dp"
-                android:layout_gravity="center_horizontal" />
+                android:layout_gravity="center"
+                android:layout_marginRight="20dp" />
+
             <NumberPicker
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/linePicker"
-                android:layout_marginTop="-30dp"
-                android:paddingTop="3dp"
                 android:orientation="vertical"
-                android:gravity="center_vertical|fill_vertical|center_horizontal"
                 android:baselineAligned="true"
-                android:layout_gravity="center_horizontal"></NumberPicker>
+                android:layout_gravity="center"></NumberPicker>
 
-        </RelativeLayout>
+        </LinearLayout>
         <LinearLayout
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@android:color/white"
+            android:gravity="center_horizontal"
+            android:layout_marginBottom="20dp" >
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Start Station"
                 android:id="@+id/stationText"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="3dp"
-                android:layout_marginLeft="5dp"
-                android:layout_gravity="center_horizontal" />
+                android:layout_gravity="center"
+                android:layout_marginRight="20dp" />
             <!-- everything you already have -->
             <NumberPicker
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/stationPicker"
-                android:layout_marginTop="-30dp"
-                android:paddingTop="3dp"
                 android:layout_gravity="center_horizontal"></NumberPicker>
         </LinearLayout>
+
         <LinearLayout
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:background="@android:color/white"
+            android:layout_marginBottom="20dp" >
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Direction"
                 android:id="@+id/directionText"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="3dp"
-                android:layout_marginLeft="5dp"
-                android:layout_gravity="center_horizontal" />
+                android:layout_gravity="center"
+                android:layout_marginRight="20dp" />
             <NumberPicker
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -82,11 +89,6 @@
                 android:paddingTop="3dp"
                 android:layout_gravity="center_horizontal"></NumberPicker>
         </LinearLayout>
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal">
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -97,7 +99,8 @@
                 android:clickable="true"
                 android:onClick="SendStationAndDirection"
                 android:nestedScrollingEnabled="false"
-                android:background="@drawable/bar_2" />
+                android:background="@drawable/bar_2"
+                android:textColor="@android:color/white" />
         </LinearLayout>
-    </LinearLayout>
+    </RelativeLayout>
 </ScrollView>
