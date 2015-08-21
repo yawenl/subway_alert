@@ -54,7 +54,8 @@ public class GenerateAlert extends TimerTask{
                 station_name = "place-coecl";
             }
 
-            String url = "http://realtime.mbta.com/developer/api/v2/predictionsbystop?api_key=pt6WCTS-90qfxB3R0yPYOA&stop=" + station_name + "&format=json";
+            //String url = "http://realtime.mbta.com/developer/api/v2/predictionsbystop?api_key=pt6WCTS-90qfxB3R0yPYOA&stop=" + station_name + "&format=json";
+            String url = "http://realtime.mbta.com/developer/api/v2/predictionsbystop?api_key=22Sq3HSE3UmBpja9YuM5HQ&stop=" + station_name + "&format=json";
 
             Log.d("hour", "" + hour);
             Log.d("min", ""+min);

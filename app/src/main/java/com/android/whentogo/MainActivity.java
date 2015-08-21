@@ -25,7 +25,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import enumPackage.DirectionOptions;
-import enumPackage.StationOptions;
+import enumPackage.OrangeOptions;
+import enumPackage.GreenOptions;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -139,7 +140,18 @@ public class MainActivity extends ActionBarActivity {
         this.person_home_time_min = sharedPref.getInt("workMinute", 0);
         //this.home_station_walk_time = sharedPref.getInt("home_station_walk_time", 5);
         this.work_station_walk_time = sharedPref.getInt("work_station_walk_time", 5);
-        this.work_station_name = StationOptions.values()[sharedPref.getInt("station", 0)].toString();
+        int line = sharedPref.getInt("line", 0);
+        switch(line) {
+            case 0:
+                this.work_station_name = OrangeOptions.values()[sharedPref.getInt("station", 0)].toString();
+                break;
+            case 1:
+                this.work_station_name = GreenOptions.values()[sharedPref.getInt("station", 0)].toString();
+                break;
+            default:
+                this.work_station_name = OrangeOptions.values()[sharedPref.getInt("station", 0)].toString();
+                break;
+        }
         
         this.direction_name = DirectionOptions.values()[sharedPref.getInt("direction", 0)].toString();
         this.line = color_map.get(sharedPref.getInt("line", 0));

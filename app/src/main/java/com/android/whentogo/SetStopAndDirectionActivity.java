@@ -12,12 +12,17 @@ import android.widget.NumberPicker;
 
 import  com.android.whentogo.R;
 
+import java.util.Arrays;
+
 import enumPackage.DirectionOptions;
 import enumPackage.LineOptions;
-import enumPackage.StationOptions;
+import enumPackage.OrangeOptions;
+import enumPackage.GreenOptions;
 
 
 public class SetStopAndDirectionActivity extends ActionBarActivity {
+
+    private NumberPicker stationPicker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,25 +31,65 @@ public class SetStopAndDirectionActivity extends ActionBarActivity {
 
         setContentView(R.layout.activity_set_stop_and_direction);
 
+        linePicker();
         stationPicker();
         directionPicker();
-        linePicker();
+    }
+
+    private void linePicker(){
+        NumberPicker linePick = (NumberPicker) this.findViewById(R.id.linePicker);
+        linePick.setOnValueChangedListener(new LineValueChangeListener());
+        linePick.setMinValue(0);
+        linePick.setMaxValue(LineOptions.values().length - 1);
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        linePick.setValue(sharedPreferences.getInt("line", 0));
+
+        String [] line = new String[LineOptions.values().length];
+        for(int i = 0; i < LineOptions.values().length; i++){
+            line[i] = LineOptions.values()[i].toString();
+        }
+
+        linePick.setDisplayedValues(line);
+        linePick.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
 
     }
 
-    private void stationPicker(){
+    public class LineValueChangeListener implements NumberPicker.OnValueChangeListener {
+        @Override
+        public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+            String[] options;
+            switch(newVal) {
+                case 0:
+                    options = OrangeOptions.getStringArray();
+                    break;
+                case 1:
+                    options = GreenOptions.getStringArray();
+                    break;
+                default:
+                    options = OrangeOptions.getStringArray();
+                    break;
+            }
+            System.out.println(Arrays.toString(options));
+            stationPicker.setDisplayedValues(null);
+            stationPicker.setMaxValue(options.length - 1);
+            stationPicker.setDisplayedValues(options);
+        }
+    }
+
+    private void stationPicker() {
         NumberPicker stationPick = (NumberPicker) this.findViewById(R.id.stationPicker);
-        stationPick.setMinValue(0);
-        stationPick.setMaxValue(StationOptions.values().length - 1);
+        stationPicker = stationPick;
+        stationPicker.setMinValue(0);
+        stationPicker.setMaxValue(OrangeOptions.values().length - 1);
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        stationPick.setValue(sharedPreferences.getInt("station", 0));
-        String [] station = new String[StationOptions.values().length];
-        for(int i = 0; i < StationOptions.values().length; i++){
-            station[i] = StationOptions.values()[i].toString();
+        stationPicker.setValue(sharedPreferences.getInt("station", 0));
+        String [] station = new String[OrangeOptions.values().length];
+        for(int i = 0; i < OrangeOptions.values().length; i++){
+            station[i] = OrangeOptions.values()[i].toString();
         }
 
-        stationPick.setDisplayedValues(station);
-        stationPick.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
+        stationPicker.setDisplayedValues(station);
+        stationPicker.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
     }
 
     private void directionPicker(){
@@ -60,23 +105,6 @@ public class SetStopAndDirectionActivity extends ActionBarActivity {
 
         directionPick.setDisplayedValues(direction);
         directionPick.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
-    }
-
-    private void linePicker(){
-        NumberPicker linePick = (NumberPicker) this.findViewById(R.id.linePicker);
-        linePick.setMinValue(0);
-        linePick.setMaxValue(LineOptions.values().length - 1);
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        linePick.setValue(sharedPreferences.getInt("line", 0));
-
-        String [] line = new String[LineOptions.values().length];
-        for(int i = 0; i < LineOptions.values().length; i++){
-            line[i] = LineOptions.values()[i].toString();
-        }
-
-        linePick.setDisplayedValues(line);
-        linePick.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
-
     }
 
     @Override
